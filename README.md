@@ -15,6 +15,20 @@ MiModex 基于 Tauri、React、TypeScript、Rust 构建，并内置了一份 Ani
 - 本地设置和诊断：检查 API 连接、内置引擎、系统环境、能力可用性。
 - GitHub Actions 发布流程已支持 Apple Silicon Mac、Intel Mac、Windows x64。
 
+## 界面预览
+
+### MiMo Code 对话工作流
+
+![MiModex MiMo Code 对话工作流](docs/images/mimodex-chat-workflow.png)
+
+### 执行前授权
+
+![MiModex 执行前授权面板](docs/images/mimodex-permission-panel.png)
+
+### 岛屿应用入口
+
+![MiModex 岛屿应用入口](docs/images/mimodex-app-hub.png)
+
 ## 平台支持
 
 | 平台 | Release target | 状态 |
