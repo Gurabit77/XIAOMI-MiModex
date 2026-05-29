@@ -1,0 +1,57 @@
+// @bun
+import {
+  init_envUtils,
+  isEnvTruthy
+} from "./chunk-hxhwzgnn.js";
+import {
+  __esm
+} from "./chunk-qp2qdcda.js";
+
+// src/utils/subprocessEnv.ts
+function registerUpstreamProxyEnvFn(fn) {
+  _getUpstreamProxyEnv = fn;
+}
+function subprocessEnv() {
+  const proxyEnv = _getUpstreamProxyEnv?.() ?? {};
+  if (!isEnvTruthy(process.env.CLAUDE_CODE_SUBPROCESS_ENV_SCRUB)) {
+    return Object.keys(proxyEnv).length > 0 ? { ...process.env, ...proxyEnv } : process.env;
+  }
+  const env = { ...process.env, ...proxyEnv };
+  for (const k of GHA_SUBPROCESS_SCRUB) {
+    delete env[k];
+    delete env[`INPUT_${k}`];
+  }
+  return env;
+}
+var GHA_SUBPROCESS_SCRUB, _getUpstreamProxyEnv;
+var init_subprocessEnv = __esm(() => {
+  init_envUtils();
+  GHA_SUBPROCESS_SCRUB = [
+    "ANTHROPIC_API_KEY",
+    "CLAUDE_CODE_OAUTH_TOKEN",
+    "ANTHROPIC_AUTH_TOKEN",
+    "ANTHROPIC_FOUNDRY_API_KEY",
+    "ANTHROPIC_CUSTOM_HEADERS",
+    "MIMO_API_KEY",
+    "OTEL_EXPORTER_OTLP_HEADERS",
+    "OTEL_EXPORTER_OTLP_LOGS_HEADERS",
+    "OTEL_EXPORTER_OTLP_METRICS_HEADERS",
+    "OTEL_EXPORTER_OTLP_TRACES_HEADERS",
+    "AWS_SECRET_ACCESS_KEY",
+    "AWS_SESSION_TOKEN",
+    "AWS_BEARER_TOKEN_BEDROCK",
+    "GOOGLE_APPLICATION_CREDENTIALS",
+    "AZURE_CLIENT_SECRET",
+    "AZURE_CLIENT_CERTIFICATE_PATH",
+    "ACTIONS_ID_TOKEN_REQUEST_TOKEN",
+    "ACTIONS_ID_TOKEN_REQUEST_URL",
+    "ACTIONS_RUNTIME_TOKEN",
+    "ACTIONS_RUNTIME_URL",
+    "ALL_INPUTS",
+    "OVERRIDE_GITHUB_TOKEN",
+    "DEFAULT_WORKFLOW_TOKEN",
+    "SSH_SIGNING_KEY"
+  ];
+});
+
+export { registerUpstreamProxyEnvFn, subprocessEnv, init_subprocessEnv };

@@ -1,0 +1,1028 @@
+/* ============================================================
+   MiModex — Island Hub Welcome Screen
+   ============================================================ */
+
+.welcome-screen {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: auto;
+  overflow-x: hidden;
+  position: relative;
+  padding-bottom: 10px;
+  scroll-padding-bottom: 150px;
+}
+
+.welcome-content {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 980px;
+  padding: 14px clamp(16px, 3.2vw, 34px) 150px;
+  animation: islandHubIn 320ms var(--ease-spring);
+}
+
+.island-hub {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.island-hub-hero {
+  display: grid;
+  grid-template-columns: 54px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 14px;
+  min-height: 82px;
+  padding: 10px 14px;
+  border: 1px solid rgba(159, 146, 125, 0.16);
+  border-radius: 30px 24px 32px 24px;
+  background: linear-gradient(180deg, rgba(255, 253, 246, 0.96), rgba(247, 243, 223, 0.84));
+  box-shadow: 0 3px 0 rgba(212, 201, 180, 0.62);
+}
+
+.island-hub-logo {
+  position: relative;
+  width: 50px;
+  height: 50px;
+  display: grid;
+  place-items: center;
+  border-radius: 28px 22px 30px 21px;
+  background: rgba(25, 200, 185, 0.14);
+  color: var(--color-text-primary);
+  box-shadow: inset 0 -3px 0 rgba(25, 200, 185, 0.08), 0 2px 0 rgba(212, 201, 180, 0.72);
+  overflow: clip;
+}
+
+.island-hub-logo > .animal-icon,
+.island-hub-logo > span[class*="icon"] {
+  position: relative;
+  z-index: 3;
+  filter: drop-shadow(0 1px 0 rgba(255, 255, 255, 0.46)) drop-shadow(0 2px 0 rgba(76, 60, 51, 0.12));
+}
+
+.island-hub-logo-leaf {
+  position: absolute;
+  width: 16px;
+  height: 12px;
+  border-radius: 70% 35% 70% 35%;
+  background: #82d5bb;
+  animation: islandLeafSway 2s ease-in-out infinite;
+}
+
+.island-hub-logo-leaf--one {
+  left: 3px;
+  top: 14px;
+  transform: rotate(-24deg);
+}
+
+.island-hub-logo-leaf--two {
+  right: 3px;
+  top: 5px;
+  background: #8ac68a;
+  animation-delay: 180ms;
+}
+
+.island-hub-copy {
+  min-width: 0;
+}
+
+.welcome-kicker,
+.nookphone-kicker,
+.starter-kicker {
+  display: inline-block;
+  color: var(--color-accent-teal-active);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-heavy);
+  line-height: 1;
+}
+
+.welcome-title {
+  margin: 4px 0 2px;
+  color: var(--color-text-primary);
+  font-size: clamp(28px, 3vw, 34px);
+  font-weight: var(--font-weight-heavy);
+  line-height: 1.04;
+  letter-spacing: 0;
+}
+
+.welcome-subtitle {
+  margin: 0;
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+  line-height: 1.45;
+}
+
+.island-hub-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.island-hub-layout {
+  display: grid;
+  grid-template-columns: minmax(460px, 1.15fr) minmax(270px, 0.64fr);
+  gap: 10px;
+  align-items: stretch;
+}
+
+.island-hub-layout--single {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.nookphone-panel,
+.starter-panel {
+  min-width: 0;
+  border: 1px solid rgba(159, 146, 125, 0.16);
+  border-radius: 26px;
+  background: rgba(255, 253, 246, 0.72);
+  box-shadow: 0 4px 0 rgba(212, 201, 180, 0.52), 0 12px 26px rgba(107, 92, 67, 0.06);
+}
+
+.nookphone-panel {
+  position: relative;
+  padding: 10px;
+  background: linear-gradient(180deg, rgba(248, 244, 232, 0.92), rgba(255, 253, 246, 0.78));
+  overflow: hidden;
+}
+
+.nookphone-panel::before {
+  display: none;
+}
+
+.nookphone-device-rail {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+  padding: 0 4px;
+  color: var(--color-text-muted);
+  font-size: 12px;
+  font-weight: var(--font-weight-heavy);
+  line-height: 1;
+}
+
+.nookphone-rail-dot {
+  justify-self: start;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #8ac68a;
+  box-shadow: 13px 0 0 rgba(255, 204, 0, 0.72), 26px 0 0 rgba(25, 200, 185, 0.62);
+}
+
+.nookphone-rail-signal {
+  justify-self: end;
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 11px;
+}
+
+.nookphone-rail-signal i {
+  width: 4px;
+  border-radius: 4px;
+  background: currentColor;
+}
+
+.nookphone-rail-signal i:nth-child(1) { height: 5px; opacity: 0.48; }
+.nookphone-rail-signal i:nth-child(2) { height: 8px; opacity: 0.7; }
+.nookphone-rail-signal i:nth-child(3) { height: 11px; opacity: 0.9; }
+
+.nookphone-panel > * {
+  position: relative;
+  z-index: 1;
+}
+
+.nookphone-panel-head,
+.starter-panel-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 7px;
+}
+
+.nookphone-panel h2,
+.starter-panel h2 {
+  margin: 3px 0 0;
+  color: var(--color-text-primary);
+  font-size: 18px;
+  font-weight: var(--font-weight-heavy);
+  line-height: 1.12;
+  letter-spacing: 0;
+}
+
+.nookphone-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 7px;
+}
+
+.nookphone-app-section {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 8px;
+  padding: 8px;
+  border: 1px solid rgba(159, 146, 125, 0.14);
+  border-radius: 20px;
+  background: rgba(255, 253, 246, 0.42);
+}
+
+.nookphone-app-section-title {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  min-height: 23px;
+  padding: 2px 9px;
+  border-radius: var(--radius-pill);
+  background: rgba(230, 249, 246, 0.72);
+  color: var(--color-accent-teal-active);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-heavy);
+  line-height: 1.2;
+  box-shadow: 0 1px 0 rgba(212, 201, 180, 0.72);
+}
+
+.nookphone-panel--full {
+  min-height: 100%;
+}
+
+.welcome-onboarding-map {
+  display: grid;
+  grid-template-columns: auto minmax(24px, 1fr) auto minmax(24px, 1fr) auto;
+  align-items: center;
+  gap: 6px;
+  margin: 0 0 7px;
+  padding: 5px;
+  border: 1px solid rgba(159, 146, 125, 0.14);
+  border-radius: var(--radius-pill);
+  background: rgba(255, 253, 246, 0.64);
+  box-shadow: 0 2px 0 rgba(212, 201, 180, 0.58);
+}
+
+.welcome-onboarding-map > i,
+.welcome-status-line {
+  display: block;
+  height: 5px;
+  border-radius: var(--radius-pill);
+  background: rgba(25, 200, 185, 0.22);
+}
+
+.welcome-onboarding-step {
+  min-width: 0;
+  min-height: 30px;
+  display: inline-grid;
+  grid-template-columns: 24px minmax(0, 1fr);
+  align-items: center;
+  gap: 6px;
+  padding: 4px 8px;
+  border: 1px solid rgba(159, 146, 125, 0.16);
+  border-radius: var(--radius-pill);
+  background: rgba(255, 255, 255, 0.58);
+  color: var(--color-text-primary);
+  box-shadow: 0 2px 0 rgba(212, 201, 180, 0.66);
+  cursor: pointer;
+  font-family: var(--font-family);
+  transition:
+    transform var(--duration-fast) var(--ease-smooth),
+    box-shadow var(--duration-fast) var(--ease-smooth),
+    border-color var(--duration-fast) var(--ease-smooth);
+}
+
+.welcome-onboarding-step:hover {
+  transform: translateY(-1px);
+  border-color: rgba(25, 200, 185, 0.34);
+  box-shadow: 0 3px 0 rgba(212, 201, 180, 0.66);
+}
+
+.welcome-onboarding-step:active {
+  transform: translateY(1px);
+  box-shadow: 0 1px 0 rgba(212, 201, 180, 0.8);
+}
+
+.welcome-onboarding-step span {
+  width: 22px;
+  height: 22px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: rgba(230, 249, 246, 0.82);
+  color: #0d766f;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-heavy);
+  line-height: 1;
+}
+
+.welcome-onboarding-step strong {
+  min-width: 0;
+  color: var(--color-text-primary);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-heavy);
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.welcome-onboarding-step--active {
+  background: #e6f9f6;
+  border-color: rgba(25, 200, 185, 0.38);
+}
+
+.nookphone-grid--hub {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 7px;
+}
+
+.nookphone-grid--advanced {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.welcome-route-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  margin-top: 7px;
+  padding: 8px;
+  border: 1px solid rgba(159, 146, 125, 0.14);
+  border-radius: 20px;
+  background: rgba(255, 253, 246, 0.48);
+}
+
+.welcome-route-panel-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  width: fit-content;
+  min-height: 23px;
+  padding: 2px 9px;
+  border-radius: var(--radius-pill);
+  background: rgba(230, 249, 246, 0.72);
+  color: var(--color-accent-teal-active);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-heavy);
+  line-height: 1.2;
+  box-shadow: 0 1px 0 rgba(212, 201, 180, 0.72);
+}
+
+.welcome-route-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 7px;
+}
+
+.welcome-route {
+  --route-color: #19c8b9;
+  --route-soft: rgba(25, 200, 185, 0.14);
+  position: relative;
+  min-width: 0;
+  min-height: 66px;
+  display: grid;
+  grid-template-columns: 40px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  border: 1px solid rgba(159, 146, 125, 0.16);
+  border-left: 4px solid var(--route-color);
+  border-radius: 23px;
+  background:
+    linear-gradient(180deg, var(--route-soft), rgba(255, 253, 246, 0.84));
+  color: var(--color-text-primary);
+  box-shadow: 0 2px 0 rgba(212, 201, 180, 0.68);
+  cursor: pointer;
+  font-family: var(--font-family);
+  text-align: left;
+  animation: nookAppIn 340ms var(--ease-spring) backwards;
+  transition:
+    transform var(--duration-normal) var(--ease-spring),
+    box-shadow var(--duration-fast) var(--ease-smooth),
+    border-color var(--duration-fast) var(--ease-smooth);
+  overflow: hidden;
+}
+
+.welcome-route:hover {
+  transform: translateY(-2px);
+  border-color: rgba(25, 200, 185, 0.42);
+  box-shadow: 0 4px 0 rgba(212, 201, 180, 0.72);
+}
+
+.welcome-route:active {
+  transform: translateY(2px) scale(0.99);
+  box-shadow: 0 2px 0 rgba(212, 201, 180, 0.9);
+}
+
+.welcome-route--blue { --route-color: #889df0; --route-soft: rgba(136, 157, 240, 0.2); }
+.welcome-route--teal { --route-color: #19c8b9; --route-soft: rgba(25, 200, 185, 0.16); }
+.welcome-route--green { --route-color: #8ac68a; --route-soft: rgba(138, 198, 138, 0.18); }
+.welcome-route--yellow { --route-color: #f7cd67; --route-soft: rgba(255, 204, 0, 0.2); }
+.welcome-route--orange { --route-color: #e59266; --route-soft: rgba(229, 146, 102, 0.18); }
+.welcome-route--red { --route-color: #fc736d; --route-soft: rgba(252, 115, 109, 0.14); }
+
+.welcome-route-icon {
+  --mimo-mark-bg: var(--route-color);
+  position: relative;
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  border-radius: 16px;
+  border: 2px solid color-mix(in srgb, var(--route-color) 62%, rgba(255, 253, 246, 0.92));
+  background: linear-gradient(180deg, color-mix(in srgb, var(--route-color) 14%, #fffdf6), rgba(255, 253, 246, 0.98));
+  color: var(--route-color);
+  box-shadow: var(--mimo-icon-slot-shadow);
+  overflow: hidden;
+}
+
+.welcome-route-icon [class*="icon"] {
+  position: relative;
+  z-index: 2;
+  filter: drop-shadow(0 1px 0 rgba(255, 255, 255, 0.38)) drop-shadow(0 2px 0 rgba(76, 60, 51, 0.16));
+}
+
+.welcome-route:hover .welcome-route-icon {
+  transform: translateY(-1px);
+}
+
+.welcome-route-copy,
+.welcome-route-copy strong,
+.welcome-route-copy small {
+  display: block;
+  min-width: 0;
+}
+
+.welcome-route-copy strong {
+  color: var(--color-text-primary);
+  font-size: 16px;
+  font-weight: var(--font-weight-heavy);
+  line-height: 1.2;
+}
+
+.welcome-route-copy small {
+  margin-top: 2px;
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-bold);
+  line-height: 1.3;
+  white-space: normal;
+}
+
+.welcome-route em {
+  align-self: start;
+  min-height: 22px;
+  display: inline-flex;
+  align-items: center;
+  padding: 1px 7px;
+  border-radius: var(--radius-pill);
+  background: rgba(255, 253, 246, 0.84);
+  color: var(--color-text-primary);
+  font-size: 12px;
+  font-style: normal;
+  font-weight: var(--font-weight-heavy);
+  line-height: 1.2;
+  box-shadow: 0 2px 0 rgba(189, 174, 160, 0.48);
+  white-space: nowrap;
+}
+
+.nookphone-app {
+  --app-color: #19c8b9;
+  --app-soft: rgba(25, 200, 185, 0.14);
+  position: relative;
+  min-width: 0;
+  min-height: 104px;
+  display: grid;
+  grid-template-rows: 46px auto auto;
+  justify-items: center;
+  align-content: center;
+  gap: 4px;
+  padding: 10px 9px;
+  border: 1px solid rgba(159, 146, 125, 0.16);
+  border-radius: 28px;
+  background: linear-gradient(180deg, var(--app-soft), rgba(255, 253, 246, 0.78));
+  color: var(--color-text-primary);
+  box-shadow: 0 2px 0 rgba(212, 201, 180, 0.68);
+  cursor: pointer;
+  font-family: var(--font-family);
+  text-align: center;
+  animation: nookAppIn 340ms var(--ease-spring) backwards;
+  transition:
+    transform var(--duration-normal) var(--ease-spring),
+    box-shadow var(--duration-fast) var(--ease-smooth),
+    border-color var(--duration-fast) var(--ease-smooth);
+  overflow: hidden;
+  opacity: 1;
+}
+
+.nookphone-grid--hub .nookphone-app {
+  min-height: 74px;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: 32px 18px;
+  justify-items: center;
+  align-items: center;
+  align-content: center;
+  text-align: center;
+  gap: 4px;
+  padding: 8px 7px;
+  border-radius: 18px;
+}
+
+.nookphone-grid--advanced .nookphone-app {
+  min-height: 78px;
+  grid-template-rows: 36px auto auto;
+  padding: 8px 7px 10px;
+  border-radius: 21px;
+}
+
+.nookphone-app::before { display: none; }
+
+.nookphone-app:hover {
+  transform: translateY(-2px);
+  border-color: rgba(25, 200, 185, 0.42);
+  box-shadow: 0 4px 0 rgba(212, 201, 180, 0.72);
+}
+
+.nookphone-app:active {
+  transform: translateY(2px) scale(0.98);
+  box-shadow: 0 2px 0 rgba(212, 201, 180, 0.9);
+}
+
+.nookphone-app--blue {
+  --app-color: #889df0;
+  --app-soft: rgba(136, 157, 240, 0.22);
+}
+
+.nookphone-app--orange {
+  --app-color: #e59266;
+  --app-soft: rgba(229, 146, 102, 0.2);
+}
+
+.nookphone-app--yellow {
+  --app-color: #f7cd67;
+  --app-soft: rgba(255, 204, 0, 0.22);
+}
+
+.nookphone-app--teal {
+  --app-color: #19c8b9;
+  --app-soft: rgba(25, 200, 185, 0.18);
+}
+
+.nookphone-app--green {
+  --app-color: #8ac68a;
+  --app-soft: rgba(138, 198, 138, 0.2);
+}
+
+.nookphone-app--red {
+  --app-color: #fc736d;
+  --app-soft: rgba(252, 115, 109, 0.16);
+}
+
+.nookphone-app-icon {
+  --mimo-mark-bg: var(--app-color);
+  position: relative;
+  width: 46px;
+  height: 46px;
+  display: grid;
+  place-items: center;
+  border-radius: 19px;
+  border: 2px solid color-mix(in srgb, var(--app-color) 62%, rgba(255, 253, 246, 0.92));
+  background: linear-gradient(180deg, color-mix(in srgb, var(--app-color) 14%, #fffdf6), rgba(255, 253, 246, 0.98));
+  color: var(--app-color);
+  box-shadow: var(--mimo-icon-slot-shadow);
+  transition: transform var(--duration-normal) var(--ease-spring);
+  overflow: hidden;
+  z-index: 1;
+}
+
+.nookphone-grid--hub .nookphone-app-icon {
+  width: 30px;
+  height: 30px;
+  border-radius: 14px;
+}
+
+.nookphone-grid--advanced .nookphone-app-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 15px;
+}
+
+.nookphone-app-icon [class*="icon"] {
+  position: relative;
+  z-index: 2;
+  filter: drop-shadow(0 1px 0 rgba(255, 255, 255, 0.38)) drop-shadow(0 2px 0 rgba(76, 60, 51, 0.16));
+}
+
+.nookphone-app-badge {
+  position: absolute;
+  top: 8px;
+  right: 9px;
+  z-index: 2;
+  min-height: 19px;
+  display: inline-flex;
+  align-items: center;
+  padding: 1px 7px;
+  border-radius: var(--radius-pill);
+  background: rgba(255, 253, 246, 0.82);
+  color: var(--color-text-primary);
+  font-size: 11px;
+  font-weight: var(--font-weight-heavy);
+  box-shadow: 0 2px 0 rgba(189, 174, 160, 0.48);
+}
+
+.nookphone-grid--hub .nookphone-app-badge {
+  display: none;
+}
+
+.nookphone-app-spark {
+  display: none;
+}
+
+.nookphone-app:hover .nookphone-app-icon {
+  transform: translateY(-1px);
+}
+
+.nookphone-app-title {
+  color: var(--color-text-primary);
+  font-size: 15px;
+  font-weight: var(--font-weight-heavy);
+  line-height: 1.2;
+}
+
+.nookphone-app-desc {
+  max-width: 100%;
+  color: var(--color-text-secondary);
+  font-size: 13px;
+  font-weight: var(--font-weight-bold);
+  line-height: 1.28;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.nookphone-grid--hub .nookphone-app-title,
+.nookphone-grid--hub .nookphone-app-desc {
+  max-width: 100%;
+}
+
+.nookphone-grid--hub .nookphone-app-desc {
+  display: none;
+}
+
+.starter-panel {
+  padding: 12px;
+}
+
+.starter-steps {
+  display: grid;
+  gap: 7px;
+  margin-bottom: 9px;
+}
+
+.starter-step {
+  width: 100%;
+  min-height: 46px;
+  display: grid;
+  grid-template-columns: 30px minmax(0, 1fr);
+  align-items: center;
+  gap: 8px;
+  padding: 7px 10px;
+  border: 1px solid rgba(159, 146, 125, 0.16);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.52);
+  color: var(--color-text-primary);
+  box-shadow: 0 3px 0 rgba(212, 201, 180, 0.72);
+  cursor: pointer;
+  font-family: var(--font-family);
+  text-align: left;
+  transition:
+    transform var(--duration-fast) var(--ease-smooth),
+    box-shadow var(--duration-fast) var(--ease-smooth),
+    background var(--duration-fast) var(--ease-smooth);
+}
+
+.starter-step:hover {
+  transform: translateY(-2px);
+  background: rgba(230, 249, 246, 0.64);
+  box-shadow: 0 5px 0 rgba(212, 201, 180, 0.72);
+}
+
+.starter-step:active {
+  transform: translateY(1px);
+  box-shadow: 0 1px 0 rgba(212, 201, 180, 0.82);
+}
+
+.starter-step span {
+  width: 30px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+  border-radius: 14px;
+  background: #e6f9f6;
+  color: var(--color-accent-teal-active);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-heavy);
+}
+
+.starter-step strong {
+  min-width: 0;
+  color: var(--color-text-primary);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-bold);
+  line-height: 1.35;
+}
+
+.welcome-template-collapse {
+  margin: 0 !important;
+  border-color: rgba(159, 146, 125, 0.16) !important;
+  border-radius: 18px !important;
+  background: rgba(255, 255, 255, 0.4) !important;
+}
+
+.welcome-advanced-collapse {
+  margin-top: 8px !important;
+}
+
+.welcome-advanced-collapse [class*="questionHeader"] {
+  min-height: 34px !important;
+  padding: 6px 10px !important;
+}
+
+.welcome-advanced-collapse [class*="answerContent"] {
+  min-width: 0;
+  padding-left: 10px !important;
+  padding-right: 10px !important;
+}
+
+.welcome-template-question {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--color-text-primary);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-heavy);
+}
+
+.welcome-template-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  padding: 4px 0 6px;
+}
+
+.welcome-advanced-content {
+  display: grid;
+  gap: 10px;
+  min-width: 0;
+}
+
+.welcome-template-group {
+  display: grid;
+  gap: 7px;
+  min-width: 0;
+}
+
+.welcome-template-group-title {
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-heavy);
+  line-height: 1.25;
+}
+
+.welcome-template-card {
+  --template-color: var(--color-accent-teal);
+  min-width: 0;
+  min-height: 62px;
+  display: grid;
+  grid-template-columns: 30px minmax(0, 1fr);
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  border: 1px solid rgba(159, 146, 125, 0.16);
+  border-left: 4px solid var(--template-color);
+  border-radius: 16px;
+  background: rgba(255, 253, 246, 0.76);
+  color: var(--color-text-primary);
+  cursor: pointer;
+  font-family: var(--font-family);
+  text-align: left;
+  animation: templateIn 260ms var(--ease-spring) backwards;
+  transition:
+    transform var(--duration-fast) var(--ease-smooth),
+    box-shadow var(--duration-fast) var(--ease-smooth);
+}
+
+.welcome-template-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 0 rgba(212, 201, 180, 0.68);
+}
+
+.welcome-template-card--blue { --template-color: var(--color-accent-blue); }
+.welcome-template-card--teal { --template-color: var(--color-accent-teal); }
+.welcome-template-card--green { --template-color: var(--color-accent-green); }
+.welcome-template-card--yellow { --template-color: var(--color-accent-yellow-dark); }
+.welcome-template-card--orange { --template-color: var(--color-accent-orange); }
+
+.welcome-template-card svg,
+.welcome-template-card [class*="icon"] {
+  color: var(--template-color);
+}
+
+.welcome-template-card span {
+  min-width: 0;
+}
+
+.welcome-template-card strong,
+.welcome-template-card small {
+  display: block;
+  min-width: 0;
+}
+
+.welcome-template-card strong {
+  color: var(--color-text-primary);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-heavy);
+  line-height: 1.25;
+}
+
+.welcome-template-card small {
+  margin-top: 2px;
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+  line-height: 1.3;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.welcome-status-strip {
+  display: none !important;
+  grid-template-columns: auto minmax(28px, 1fr) auto minmax(28px, 1fr) auto;
+  align-items: center !important;
+  gap: 8px !important;
+  padding: 9px 12px !important;
+  border: 1px solid rgba(159, 146, 125, 0.14) !important;
+  border-radius: 22px !important;
+  background: rgba(255, 253, 246, 0.72) !important;
+  box-shadow: 0 3px 0 rgba(212, 201, 180, 0.54) !important;
+  cursor: default !important;
+}
+
+.welcome-status-strip:hover {
+  transform: none !important;
+}
+
+.welcome-status-item {
+  min-width: 0;
+  min-height: 30px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 9px;
+  border-radius: var(--radius-pill);
+  background: rgba(255, 255, 255, 0.56);
+  color: var(--color-text-primary);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-heavy);
+  line-height: 1.2;
+  white-space: nowrap;
+  box-shadow: inset 0 -1px 0 rgba(212, 201, 180, 0.54);
+}
+
+.welcome-footer {
+  position: sticky;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  pointer-events: none;
+  opacity: 0.11;
+  margin-top: auto;
+}
+
+@keyframes nookGrassWave {
+  0%, 100% { background-position: 0 0, 0 0, 0 0; }
+  50% { background-position: 0 18px, 0 -14px, 0 0; }
+}
+
+@keyframes islandHubIn {
+  from { transform: translateY(10px) scale(0.99); }
+  to   { transform: translateY(0) scale(1); }
+}
+
+@keyframes islandLogoFloat {
+  0%, 100% { transform: translateY(0) rotate(-1deg); }
+  50% { transform: translateY(-4px) rotate(1deg); }
+}
+
+@keyframes islandBadgeFloat {
+  0%, 100% { transform: translateY(1px) scaleX(0.94); }
+  50% { transform: translateY(-2px) scaleX(1.04); }
+}
+
+@keyframes islandLeafSway {
+  0%, 100% { translate: 0 0; }
+  50% { translate: 0 -2px; }
+}
+
+@keyframes nookAppIn {
+  from { transform: translateY(10px) scale(0.98); opacity: 0; }
+  to { transform: translateY(0) scale(1); }
+}
+
+@keyframes nookIconBounce {
+  0% { transform: scale(1) rotate(0deg); }
+  50% { transform: scale(1.16) rotate(-5deg); }
+  100% { transform: scale(1.08) rotate(-3deg); }
+}
+
+@keyframes nookSpark {
+  0%, 100% { transform: scale(0.82); opacity: 0.55; }
+  50% { transform: scale(1.08); opacity: 1; }
+}
+
+@keyframes nookAppWave {
+  from { background-position: 0 0; }
+  to { background-position: 30px 0; }
+}
+
+@keyframes templateIn {
+  from { transform: translateY(8px); }
+  to { transform: translateY(0); }
+}
+
+@keyframes welcomeRouteMove {
+  from { background-position: 0 0; }
+  to { background-position: 30px 0; }
+}
+
+@media (max-width: 940px) {
+  .island-hub-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .nookphone-grid--hub {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .nookphone-grid--advanced {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .nookphone-app {
+    min-height: 88px;
+    border-radius: 22px;
+  }
+}
+
+@media (max-width: 720px) {
+  .welcome-screen {
+    padding-bottom: 130px;
+  }
+
+  .welcome-content {
+    padding: 18px 14px 12px;
+  }
+
+  .island-hub-hero {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    text-align: center;
+  }
+
+  .island-hub-actions {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .nookphone-grid--hub,
+  .nookphone-grid--advanced,
+  .welcome-route-grid,
+  .welcome-template-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .welcome-onboarding-map,
+  .welcome-status-strip {
+    grid-template-columns: 1fr;
+    border-radius: 20px;
+  }
+
+  .nookphone-app {
+    min-height: 96px;
+    grid-template-columns: 54px minmax(0, 1fr);
+    grid-template-rows: auto auto;
+    justify-items: start;
+    text-align: left;
+    border-radius: 24px;
+  }
+
+  .nookphone-app-icon {
+    grid-row: 1 / span 2;
+  }
+}

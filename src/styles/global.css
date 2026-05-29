@@ -1,0 +1,142 @@
+/* ============================================================
+   MiModex — Global Styles
+   ============================================================ */
+
+@import "./variables.css";
+@import "./animations.css";
+
+/* ---- Reset & Base ---- */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  overflow: hidden;
+  font-family: var(--animal-font-family, var(--font-family));
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-normal);
+  color: var(--color-text-body);
+  background: var(--color-bg-primary);
+  line-height: var(--line-height);
+  letter-spacing: var(--letter-spacing);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* ---- macOS 窗口拖拽区域 ---- */
+.titlebar-drag-region {
+  -webkit-app-region: drag;
+}
+
+.titlebar-no-drag {
+  -webkit-app-region: no-drag;
+}
+
+/* ---- Selection ---- */
+::selection {
+  background: rgba(25, 200, 185, 0.25);
+  color: var(--color-text-primary);
+}
+
+/* ---- Scrollbar (macOS 风格 —— 窄、圆、半透明) ---- */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(159, 146, 125, 0.3);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(159, 146, 125, 0.5);
+}
+
+/* 自动隐藏滚动条 —— 悬停时才显示 */
+.auto-hide-scrollbar::-webkit-scrollbar-thumb {
+  background: transparent;
+  transition: background 0.3s;
+}
+
+.auto-hide-scrollbar:hover::-webkit-scrollbar-thumb {
+  background: rgba(159, 146, 125, 0.3);
+}
+
+/* ---- Focus visible (Apple 标志: 没有蓝色 outline，用柔和的黄色光晕) ---- */
+:focus-visible {
+  outline: 2.5px solid var(--color-accent-yellow);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+/* ---- Links ---- */
+a {
+  color: var(--color-accent-teal);
+  text-decoration: none;
+  transition: color var(--duration-fast) var(--ease-smooth);
+}
+
+a:hover {
+  color: var(--color-accent-teal-hover);
+}
+
+/* ---- Code ---- */
+code {
+  font-family: "SF Mono", "JetBrains Mono", "Fira Code", monospace;
+  font-size: 0.9em;
+  background: rgba(43, 33, 24, 0.08);
+  color: var(--color-text-primary);
+  padding: 2px 6px;
+  border-radius: 6px;
+}
+
+pre {
+  background: var(--color-bg-code);
+  color: var(--color-text-code);
+  border-radius: var(--radius-xl);
+  padding: var(--space-base);
+  overflow-x: auto;
+  font-family: "SF Mono", "JetBrains Mono", "Fira Code", monospace;
+  font-size: var(--font-size-sm);
+  line-height: 1.7;
+  border: 1px solid #3d3028;
+}
+
+pre code {
+  background: none;
+  padding: 0;
+  border-radius: 0;
+  color: inherit;
+}
+
+/* ---- Utility ---- */
+.truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

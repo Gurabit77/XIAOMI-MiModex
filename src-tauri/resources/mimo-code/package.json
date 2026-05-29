@@ -1,0 +1,15 @@
+{
+  "name": "mimo-code",
+  "version": "1.0.0",
+  "description": "Bundled MiMo Code runtime resources for MiModex.",
+  "type": "module",
+  "private": true,
+  "bin": {
+    "mimo": "dist/cli-node.js",
+    "mimo-bun": "dist/cli-bun.js",
+    "mimo-code": "dist/cli-node.js"
+  },
+  "files": [
+    "dist"
+  ]
+}

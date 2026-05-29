@@ -1,0 +1,304 @@
+/* ============================================================
+   MiModex — App Layout (Three-column IDE)
+   ============================================================ */
+
+.app-layout {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  background: var(--color-bg-primary);
+}
+
+/* ---- 主体区域 (titlebar 之下, statusbar 之上) ---- */
+.app-body {
+  position: relative;
+  display: flex;
+  flex: 1;
+  margin-top: var(--titlebar-height);
+  margin-bottom: var(--statusbar-height);
+  padding: 0 var(--space-md) var(--space-sm);
+  gap: var(--space-md);
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+/* ---- 中间主内容区 ---- */
+.app-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+  min-width: 0;
+  border-radius: 20px 20px 0 0;
+  background: linear-gradient(180deg, rgba(255, 253, 246, 0.42), rgba(248, 248, 240, 0.82));
+}
+
+.app-panel-scrim {
+  display: none;
+}
+
+/* ---- 底部装饰性 Footer ---- */
+.app-footer-decoration {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.1;
+}
+
+.setup-gate {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-xl);
+  overflow: auto;
+}
+
+.setup-gate-card {
+  width: min(520px, 100%);
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  gap: var(--space-md) !important;
+  padding: var(--space-xl) !important;
+  text-align: center;
+}
+
+.setup-gate-icons {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--space-sm);
+}
+
+.setup-gate-title {
+  margin: 0;
+  font-size: 24px;
+  line-height: 1.25;
+  font-weight: var(--font-weight-heavy);
+  color: var(--color-text-primary);
+  letter-spacing: 0;
+}
+
+.setup-gate-copy {
+  margin: 0;
+  max-width: 420px;
+  font-size: var(--font-size-sm);
+  line-height: 1.7;
+  color: var(--color-text-secondary);
+}
+
+.setup-gate-copy code {
+  font-family: monospace;
+  font-size: 12px;
+  background: rgba(159, 146, 125, 0.12);
+  padding: 1px 5px;
+  border-radius: 3px;
+}
+
+.setup-gate-error {
+  margin: 0;
+  max-width: 420px;
+  font-size: var(--font-size-xs);
+  line-height: 1.5;
+  color: var(--color-accent-red);
+  word-break: break-word;
+}
+
+.setup-gate-actions {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+/* ---- 响应式 ---- */
+@media (max-width: 768px) {
+  .app-body {
+    margin-top: var(--titlebar-height);
+  }
+
+  .app-footer-decoration {
+    display: none;
+  }
+
+  .setup-gate {
+    padding: var(--space-md);
+  }
+
+  .setup-gate-card {
+    padding: var(--space-lg) !important;
+  }
+}
+
+@media (max-width: 1280px) {
+  .app-layout--capability .app-body {
+    isolation: isolate;
+  }
+
+  .app-layout--capability .app-main {
+    min-width: 0;
+    width: 100%;
+  }
+
+  .app-layout--capability .app-right-panel-stage {
+    position: absolute;
+    top: 0;
+    right: var(--space-sm);
+    bottom: var(--space-sm);
+    z-index: calc(var(--z-sidebar) + 2);
+    animation: appPanelSlideFromRight 260ms var(--ease-spring);
+  }
+
+  .app-layout--capability .right-panel {
+    position: static;
+    width: min(var(--right-panel-width), calc(100vw - var(--left-panel-width) - 40px));
+    min-width: 0;
+    max-width: calc(100vw - 32px);
+    height: 100%;
+    border: 1px solid rgba(159, 146, 125, 0.2);
+    border-radius: 22px 22px 0 22px;
+    box-shadow: 0 8px 0 rgba(189, 174, 160, 0.34), 0 28px 64px rgba(54, 45, 34, 0.18);
+  }
+
+  .app-layout--capability .right-panel .rp-drawer-close {
+    display: inline-flex;
+  }
+
+  .app-layout--capability .app-panel-scrim {
+    display: block;
+    position: absolute;
+    inset: 0 var(--space-sm) var(--space-sm);
+    z-index: calc(var(--z-sidebar) + 1);
+    border: 0;
+    border-radius: 24px 24px 0 0;
+    background: rgba(54, 45, 34, 0.16);
+    backdrop-filter: blur(1px);
+    -webkit-backdrop-filter: blur(1px);
+    animation: appPanelScrimIn 180ms var(--ease-smooth);
+    cursor: pointer;
+  }
+}
+
+@media (max-width: 1180px) {
+  .app-body {
+    isolation: isolate;
+  }
+
+  .app-main {
+    min-width: 0;
+    width: 100%;
+  }
+
+  .app-right-panel-stage {
+    position: absolute;
+    top: 0;
+    right: var(--space-sm);
+    bottom: var(--space-sm);
+    z-index: calc(var(--z-sidebar) + 2);
+    animation: appPanelSlideFromRight 260ms var(--ease-spring);
+  }
+
+  .right-panel {
+    position: static;
+    width: min(var(--right-panel-width), calc(100vw - var(--left-panel-width) - 40px));
+    min-width: 0;
+    max-width: calc(100vw - 32px);
+    height: 100%;
+    border: 1px solid rgba(159, 146, 125, 0.2);
+    border-radius: 22px 22px 0 22px;
+    box-shadow: 0 8px 0 rgba(189, 174, 160, 0.34), 0 28px 64px rgba(54, 45, 34, 0.18);
+  }
+
+  .right-panel .rp-drawer-close {
+    display: inline-flex;
+  }
+
+  .app-panel-scrim {
+    display: block;
+    position: absolute;
+    inset: 0 var(--space-sm) var(--space-sm);
+    z-index: calc(var(--z-sidebar) + 1);
+    border: 0;
+    border-radius: 24px 24px 0 0;
+    background: rgba(54, 45, 34, 0.16);
+    backdrop-filter: blur(1px);
+    -webkit-backdrop-filter: blur(1px);
+    animation: appPanelScrimIn 180ms var(--ease-smooth);
+    cursor: pointer;
+  }
+}
+
+@media (max-width: 980px) {
+  .left-panel {
+    width: 72px;
+    min-width: 72px;
+  }
+
+  .left-panel .lp-nav {
+    flex-direction: column;
+    gap: 7px;
+    padding: 10px 8px;
+  }
+
+  .left-panel .lp-nav-btn {
+    width: 100%;
+    min-height: 42px;
+    justify-content: center;
+    padding: 6px;
+    border: 1px solid transparent;
+    border-radius: 16px;
+  }
+
+  .left-panel .lp-nav-label,
+  .left-panel .lp-content {
+    display: none;
+  }
+
+  .right-panel {
+    width: min(var(--right-panel-width), calc(100vw - 32px));
+    min-width: 0;
+  }
+}
+
+@media (max-width: 620px) {
+  .app-body {
+    padding: 0 6px 6px;
+    gap: 6px;
+  }
+
+  .right-panel {
+    width: auto;
+    min-width: 0;
+    max-width: calc(100vw - 12px);
+    border-radius: 22px 22px 0 0;
+  }
+
+  .app-right-panel-stage {
+    left: 6px;
+    right: 6px;
+    animation-name: appPanelSlideUp;
+  }
+}
+
+@keyframes appPanelSlideFromRight {
+  from { transform: translateX(18px) scale(0.985); }
+  to { transform: translateX(0) scale(1); }
+}
+
+@keyframes appPanelSlideUp {
+  from { transform: translateY(14px) scale(0.985); }
+  to { transform: translateY(0) scale(1); }
+}
+
+@keyframes appPanelScrimIn {
+  from { background: rgba(54, 45, 34, 0.01); }
+  to { background: rgba(54, 45, 34, 0.16); }
+}

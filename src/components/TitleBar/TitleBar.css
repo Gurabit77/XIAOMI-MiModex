@@ -1,0 +1,367 @@
+/* ============================================================
+   MiModex — TitleBar (macOS Native-feel)
+   ============================================================ */
+
+.titlebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--titlebar-height);
+  z-index: var(--z-titlebar);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 12px;
+  /* macOS 毛玻璃效果 */
+  background: var(--color-bg-titlebar);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  border-bottom: 1px solid rgba(159, 146, 125, 0.15);
+  -webkit-app-region: drag;
+  user-select: none;
+}
+
+.titlebar-left {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 92px;
+}
+
+.titlebar-center {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.titlebar-right {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  min-width: 270px;
+  justify-content: flex-end;
+  flex-shrink: 0;
+}
+
+.titlebar-left [class*="btn"],
+.titlebar-right [class*="btn"] {
+  min-width: 42px;
+  gap: 4px;
+}
+
+.titlebar-action-label {
+  display: inline-block;
+  color: currentColor;
+  font-size: 12px;
+  font-weight: var(--font-weight-bold);
+  line-height: 1;
+  white-space: nowrap;
+}
+
+/* macOS traffic lights 占位 */
+.titlebar-traffic-lights-spacer {
+  width: 66px;
+  flex-shrink: 0;
+}
+
+.titlebar-no-drag {
+  -webkit-app-region: no-drag;
+}
+
+.titlebar-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  min-height: 30px;
+  padding: 2px 8px 2px 6px;
+  border: 1px solid rgba(159, 146, 125, 0.18);
+  border-radius: 999px;
+  background: rgba(255, 253, 246, 0.64);
+  box-shadow: 0 1px 0 0 rgba(189, 174, 160, 0.42);
+}
+
+.titlebar-logo-mark {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 10px;
+  background:
+    linear-gradient(180deg, rgba(186, 228, 240, 0.88), rgba(25, 200, 185, 0.94) 58%, rgba(17, 168, 155, 0.96));
+  color: #fffdf6;
+  font-size: 13px;
+  font-weight: var(--font-weight-heavy);
+  line-height: 1;
+  box-shadow: 0 2px 0 rgba(90, 158, 30, 0.28);
+  overflow: hidden;
+}
+
+.titlebar-logo-mark > [class*="icon"] {
+  position: relative;
+  z-index: 3;
+  filter: drop-shadow(0 1px 0 rgba(255, 255, 255, 0.4)) drop-shadow(0 1px 0 rgba(76, 60, 51, 0.12));
+}
+
+.titlebar-title {
+  font-size: 13px;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  letter-spacing: 0;
+}
+
+.titlebar-brand-leaf {
+  width: 7px;
+  height: 7px;
+  border-radius: 7px 1px 7px 1px;
+  background: var(--color-accent-green);
+  transform: rotate(-28deg);
+  animation: brandLeafSway 2.8s ease-in-out infinite;
+}
+
+@keyframes brandLeafSway {
+  0%, 100% { transform: rotate(-28deg) translateY(0); }
+  50% { transform: rotate(10deg) translateY(-1px); }
+}
+
+/* ---- Center controls (model, effort, fast toggle) ---- */
+.titlebar-controls {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-left: 0;
+  padding: 3px 5px 3px 4px;
+  min-width: 0;
+  flex: 0 1 348px;
+  max-width: 348px;
+  overflow: visible;
+  border: 1px solid rgba(159, 146, 125, 0.16);
+  border-radius: 999px;
+  background: rgba(255, 253, 246, 0.58);
+  box-shadow: 0 1px 0 rgba(189, 174, 160, 0.34);
+}
+
+.titlebar-controls > * {
+  min-width: 0;
+  flex-shrink: 1;
+}
+
+.titlebar-connection-dot-wrapper {
+  display: flex;
+  align-items: center;
+  padding-right: 4px;
+}
+
+.titlebar-connection-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+}
+
+.titlebar-connection-dot--connected {
+  background: var(--color-accent-green);
+  animation: breathe 2.5s ease-in-out infinite;
+}
+
+.titlebar-connection-dot--connecting {
+  background: var(--color-accent-yellow);
+  animation: breathe 1s ease-in-out infinite;
+}
+
+.titlebar-connection-dot--disconnected {
+  background: var(--color-text-disabled);
+}
+
+.titlebar-connection-dot--error {
+  background: var(--color-accent-red);
+}
+
+@keyframes breathe {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+/* ---- Fast mode toggle ---- */
+.titlebar-fast-toggle {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  padding-right: 1px;
+}
+
+.titlebar-fast-label {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+}
+
+/* ---- Select 缩小适配 titlebar ---- */
+.titlebar-controls .animal-select {
+  min-width: auto;
+}
+
+.titlebar-controls [class*="select"] {
+  min-width: 0 !important;
+  max-width: 116px;
+  overflow: visible;
+}
+
+.titlebar-controls [class*="select"]:first-of-type {
+  min-width: 100px !important;
+  max-width: 118px;
+}
+
+.titlebar-controls [class*="select"]:nth-of-type(2) {
+  width: 68px !important;
+  max-width: 68px;
+}
+
+.titlebar-controls [class*="selected"],
+.titlebar-controls [class*="value"] {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.titlebar-controls [class*="dropdown"] {
+  z-index: calc(var(--z-titlebar) + 20) !important;
+  min-width: max-content;
+  max-width: min(240px, 70vw);
+  filter: drop-shadow(0 8px 16px rgba(76, 60, 51, 0.16));
+}
+
+/* ---- Clock (右上角时钟) ---- */
+.titlebar-clock {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding-right: var(--space-xs);
+  user-select: none;
+}
+
+.titlebar-clock-date {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-disabled);
+  letter-spacing: 0;
+}
+
+.titlebar-clock-time {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-secondary);
+  letter-spacing: 0;
+  font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 900px) {
+  .titlebar-clock,
+  .titlebar-fast-label,
+  .titlebar-action-label {
+    display: none;
+  }
+
+  .titlebar-right {
+    min-width: 0;
+  }
+
+  .titlebar-controls {
+    gap: 6px;
+    margin-left: var(--space-sm);
+    padding-right: 4px;
+  }
+}
+
+@media (max-width: 1180px) {
+  .titlebar {
+    padding-inline: 8px;
+  }
+
+  .titlebar-right {
+    min-width: 270px;
+    gap: 2px;
+  }
+
+  .titlebar-clock-date {
+    display: none;
+  }
+
+  .titlebar-controls {
+    flex-basis: 318px;
+    max-width: 318px;
+  }
+
+  .titlebar-controls [class*="select"]:first-of-type {
+    min-width: 88px !important;
+    max-width: 98px;
+  }
+
+  .titlebar-controls [class*="select"]:nth-of-type(2) {
+    width: 64px !important;
+    max-width: 64px;
+  }
+}
+
+@media (max-width: 760px) {
+  .titlebar {
+    gap: 6px;
+    padding-inline: 10px;
+  }
+
+  .titlebar-traffic-lights-spacer {
+    width: 58px;
+  }
+
+  .titlebar-title {
+    display: none;
+  }
+
+  .titlebar-brand {
+    padding-right: 6px;
+  }
+
+  .titlebar-center {
+    justify-content: flex-start;
+  }
+
+  .titlebar-controls {
+    max-width: min(260px, 44vw);
+    overflow: hidden;
+  }
+
+  .titlebar-controls .titlebar-fast-toggle {
+    display: none;
+  }
+
+  .titlebar-left [class*="btn"],
+  .titlebar-right [class*="btn"] {
+    width: 34px;
+    min-width: 34px !important;
+    height: 32px;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    justify-content: center;
+  }
+
+  .titlebar-right {
+    gap: 3px;
+  }
+}
+
+@media (max-width: 620px) {
+  .titlebar-traffic-lights-spacer {
+    width: 42px;
+  }
+
+  .titlebar-brand {
+    display: none;
+  }
+
+  .titlebar-controls {
+    max-width: min(230px, 42vw);
+    margin-left: 0;
+  }
+}

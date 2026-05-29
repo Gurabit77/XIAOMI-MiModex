@@ -1,0 +1,181 @@
+/* ============================================================
+   MiModex — StatusBar
+   ============================================================ */
+
+.statusbar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: var(--statusbar-height);
+  z-index: var(--z-titlebar);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--space-md);
+  background: var(--color-bg-titlebar);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  border-top: 1px solid rgba(159, 146, 125, 0.15);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  user-select: none;
+}
+
+.statusbar-section {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.statusbar-left {
+  min-width: 160px;
+}
+
+.statusbar-center {
+  flex: 1;
+  justify-content: center;
+}
+
+.statusbar-right {
+  min-width: 80px;
+  justify-content: flex-end;
+}
+
+.statusbar-brand {
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  letter-spacing: 0;
+}
+
+.statusbar-model {
+  font-weight: var(--font-weight-medium);
+  color: var(--color-accent-teal);
+}
+
+.statusbar-runtime {
+  padding: 2px 6px;
+  border-radius: 999px;
+  font-size: var(--font-size-sm);
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.statusbar-runtime--desktop {
+  color: var(--color-accent-teal-active);
+  background: rgba(66, 164, 154, 0.12);
+}
+
+.statusbar-runtime--browser-preview {
+  color: var(--color-accent-orange);
+  background: rgba(231, 141, 77, 0.14);
+}
+
+.statusbar-engine {
+  color: var(--color-text-muted);
+  white-space: nowrap;
+}
+
+.statusbar-engine--embedded {
+  color: var(--color-accent-teal-active);
+}
+
+.statusbar-engine--system {
+  color: var(--color-accent-yellow);
+}
+
+.statusbar-engine--unavailable {
+  color: var(--color-accent-red);
+}
+
+.statusbar-effort {
+  color: var(--color-text-muted);
+}
+
+.statusbar-divider {
+  color: var(--color-text-disabled);
+  margin: 0 2px;
+}
+
+/* ---- Token bar ---- */
+.statusbar-tokens {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.statusbar-token-bar {
+  width: 60px;
+  height: 4px;
+  border-radius: 2px;
+  background: rgba(159, 146, 125, 0.2);
+  overflow: hidden;
+}
+
+.statusbar-token-fill {
+  height: 100%;
+  border-radius: 2px;
+  background: var(--color-accent-teal);
+  transition: width var(--duration-normal) var(--ease-smooth);
+}
+
+.statusbar-token-text {
+  color: var(--color-text-muted);
+  white-space: nowrap;
+}
+
+/* ---- Connection status dot ---- */
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.status-dot--connected {
+  background: var(--color-accent-green);
+  animation: breathe 2.5s ease-in-out infinite;
+}
+
+.status-dot--connecting {
+  background: var(--color-accent-yellow);
+  animation: breathe 1s ease-in-out infinite;
+}
+
+.status-dot--disconnected {
+  background: var(--color-text-disabled);
+}
+
+.status-dot--error {
+  background: var(--color-accent-red);
+}
+
+@keyframes breathe {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+.statusbar-status-text {
+  color: var(--color-text-muted);
+}
+
+.statusbar-session {
+  color: var(--color-text-disabled);
+  font-family: monospace;
+  font-size: var(--font-size-sm);
+}
+
+@media (max-width: 760px) {
+  .statusbar {
+    padding: 0 var(--space-sm);
+  }
+
+  .statusbar-center {
+    justify-content: flex-end;
+  }
+
+  .statusbar-tokens,
+  .statusbar-right {
+    display: none;
+  }
+}

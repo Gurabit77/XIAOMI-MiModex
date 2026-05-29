@@ -1,0 +1,577 @@
+// @bun
+import {
+  REPL
+} from "./chunk-x7hqdajd.js";
+import"./chunk-sdvsr5f5.js";
+import"./chunk-vz05xsp3.js";
+import"./chunk-fna1fzv7.js";
+import {
+  computeStandaloneAgentContext,
+  exports_persist,
+  init_persist,
+  restoreAgentFromSession,
+  restoreWorktreeForResume
+} from "./chunk-17p12gv3.js";
+import"./chunk-cfm1q1cq.js";
+import"./chunk-68mbhg7q.js";
+import"./chunk-zkrcgnzq.js";
+import {
+  renameRecordingForSession
+} from "./chunk-4x70hd9p.js";
+import"./chunk-r3e817kz.js";
+import"./chunk-nt837qt9.js";
+import"./chunk-73krv3xz.js";
+import"./chunk-x0ym1db4.js";
+import"./chunk-4hv90qcz.js";
+import"./chunk-deezf6jz.js";
+import"./chunk-pbyr3qb9.js";
+import"./chunk-5qgkg9xs.js";
+import"./chunk-ch3bn7nb.js";
+import"./chunk-004v1fbw.js";
+import"./chunk-4xf25mbr.js";
+import"./chunk-03jyvjpx.js";
+import"./chunk-c7yh8dgr.js";
+import"./chunk-mcws22k3.js";
+import"./chunk-5w4m2atj.js";
+import"./chunk-e724k231.js";
+import"./chunk-72mdtjhq.js";
+import"./chunk-0a0a56f2.js";
+import"./chunk-6dnfj8kf.js";
+import"./chunk-bcfd2zw7.js";
+import"./chunk-r84f4h9e.js";
+import"./chunk-cn0fk24z.js";
+import"./chunk-p7749nem.js";
+import"./chunk-910z34p6.js";
+import"./chunk-r5k8k50k.js";
+import"./chunk-zvknjy2z.js";
+import {
+  LogSelector,
+  agenticSessionSearch,
+  checkCrossProjectResume,
+  init_LogSelector,
+  init_agenticSessionSearch,
+  init_crossProjectResume
+} from "./chunk-6wq4rcrr.js";
+import"./chunk-shdn4bnr.js";
+import"./chunk-70k34e2g.js";
+import"./chunk-y61nhd8m.js";
+import"./chunk-cnsj3vq2.js";
+import"./chunk-e1je451e.js";
+import"./chunk-sd2xvsn5.js";
+import"./chunk-qff5yg0r.js";
+import"./chunk-6e7sc1s6.js";
+import"./chunk-xcq5qc2w.js";
+import"./chunk-p111txfv.js";
+import"./chunk-9gpajj6e.js";
+import"./chunk-jdgeec04.js";
+import"./chunk-krd7atxb.js";
+import"./chunk-3k6prj0g.js";
+import"./chunk-ssbt9t59.js";
+import"./chunk-95sm06gp.js";
+import"./chunk-m71yccb6.js";
+import"./chunk-w8gr0aw0.js";
+import"./chunk-aa1018fa.js";
+import"./chunk-qn9h7tj1.js";
+import"./chunk-1bfwvkr1.js";
+import"./chunk-7mvz4cx2.js";
+import"./chunk-w84rgy3d.js";
+import"./chunk-2stg2ast.js";
+import"./chunk-a8d3h0xq.js";
+import"./chunk-p6jb8wcb.js";
+import"./chunk-ajv3be4s.js";
+import"./chunk-zx0zcmd8.js";
+import"./chunk-js8hvz4s.js";
+import"./chunk-dmsj0t95.js";
+import"./chunk-4gx2hy61.js";
+import"./chunk-3rk983b5.js";
+import"./chunk-eqtet8t7.js";
+import"./chunk-9v7as0jr.js";
+import"./chunk-758qmraw.js";
+import"./chunk-r7c48x44.js";
+import"./chunk-wmwjaw1a.js";
+import"./chunk-9yvvqqct.js";
+import"./chunk-rn0v1hk8.js";
+import"./chunk-ym5r3jnk.js";
+import {
+  Spinner,
+  adoptResumedSessionFile,
+  asSessionId,
+  enrichLogs,
+  init_AppState,
+  init_Spinner,
+  init_concurrentSessions,
+  init_conversationRecovery,
+  init_cost_tracker,
+  init_ids,
+  init_messages1 as init_messages,
+  init_sessionStorage,
+  init_useTerminalSize,
+  isCustomTitleEnabled,
+  loadAllProjectsMessageLogsProgressive,
+  loadConversationForResume,
+  loadSameRepoMessageLogsProgressive,
+  recordContentReplacement,
+  resetSessionFilePointer,
+  restoreCostStateForSession,
+  restoreSessionMetadata,
+  updateSessionName,
+  useAppState,
+  useSetAppState
+} from "./chunk-ktw919wt.js";
+import"./chunk-qwtafr2b.js";
+import"./chunk-jz6xf3ty.js";
+import"./chunk-et824jj8.js";
+import"./chunk-var1et7e.js";
+import"./chunk-v81kv9zm.js";
+import"./chunk-chmfqs2y.js";
+import"./chunk-1gfk9pd3.js";
+import"./chunk-2gzv8nrw.js";
+import"./chunk-ehtwnxpg.js";
+import"./chunk-1th1nz5d.js";
+import"./chunk-x6pa9me9.js";
+import"./chunk-wbtp4zy8.js";
+import"./chunk-ypmcesxe.js";
+import"./chunk-ybaawhyf.js";
+import"./chunk-bhdt6k7w.js";
+import"./chunk-cgfdkzhb.js";
+import"./chunk-0rstde44.js";
+import"./chunk-2cvt1abr.js";
+import"./chunk-5ptgeqdf.js";
+import"./chunk-1jvg23ym.js";
+import"./chunk-akkx6jmm.js";
+import"./chunk-7fht54sw.js";
+import"./chunk-pfhyp451.js";
+import"./chunk-25ctr1k2.js";
+import"./chunk-azxwk3qa.js";
+import"./chunk-2e52n52z.js";
+import {
+  init_useKeybinding
+} from "./chunk-dsnwry8r.js";
+import"./chunk-ps49ymvj.js";
+import"./chunk-t4kcvmes.js";
+import"./chunk-tas8sqfx.js";
+import"./chunk-kqqj7b7y.js";
+import"./chunk-edqtm6y0.js";
+import"./chunk-jakzh3ae.js";
+import"./chunk-wf3yck87.js";
+import"./chunk-1r0yky0f.js";
+import"./chunk-jtnkamme.js";
+import"./chunk-92f9twfz.js";
+import"./chunk-6dj3cf9s.js";
+import"./chunk-dn7vyq4j.js";
+import"./chunk-4jm600zv.js";
+import"./chunk-vs4r0kd5.js";
+import"./chunk-g57ncwpz.js";
+import"./chunk-9pp18zcp.js";
+import"./chunk-h1xx834r.js";
+import"./chunk-p8zggt02.js";
+import"./chunk-6rj8k2tr.js";
+import"./chunk-x69b8r8v.js";
+import"./chunk-gx4kmdam.js";
+import"./chunk-b53tzh92.js";
+import"./chunk-gd6w3h9n.js";
+import"./chunk-1ghcng4e.js";
+import"./chunk-pz9t24tq.js";
+import"./chunk-4efha55s.js";
+import"./chunk-t7f7dp4k.js";
+import"./chunk-zwarn9h7.js";
+import"./chunk-b127reh2.js";
+import"./chunk-et54q618.js";
+import"./chunk-pe9b769s.js";
+import"./chunk-64c1avct.js";
+import"./chunk-8g5pe1gr.js";
+import"./chunk-0rbpfkda.js";
+import"./chunk-gnw2dwca.js";
+import"./chunk-wbmn1xar.js";
+import"./chunk-3c25bcsw.js";
+import"./chunk-nw7v8w65.js";
+import"./chunk-xhesahm0.js";
+import"./chunk-rh5a2rg9.js";
+import"./chunk-4cp6193g.js";
+import"./chunk-8g747a8x.js";
+import"./chunk-d7886r6a.js";
+import"./chunk-adnxyg7j.js";
+import"./chunk-djs11qd6.js";
+import"./chunk-nrv96v1h.js";
+import"./chunk-gdqk4ssq.js";
+import"./chunk-bwawjerw.js";
+import"./chunk-p2816w9z.js";
+import"./chunk-v9smspw2.js";
+import"./chunk-v1kzp02e.js";
+import"./chunk-x5hyyhqf.js";
+import"./chunk-crmjpsqe.js";
+import {
+  ThemedBox_default,
+  ThemedText,
+  init_src,
+  setClipboard,
+  useKeybinding,
+  useTerminalSize
+} from "./chunk-er1s76c9.js";
+import {
+  require_jsx_dev_runtime,
+  require_react
+} from "./chunk-b5wxetbv.js";
+import {
+  init_analytics,
+  logEvent
+} from "./chunk-f2mhrmww.js";
+import"./chunk-0vkfrmqm.js";
+import"./chunk-0xjaqda8.js";
+import"./chunk-c84gr0s2.js";
+import"./chunk-t6jhrn34.js";
+import"./chunk-95xve7f8.js";
+import"./chunk-jdq8jgyg.js";
+import"./chunk-qcwbd71h.js";
+import"./chunk-dxvkxgnf.js";
+import {
+  init_log,
+  logError
+} from "./chunk-w5ahy59y.js";
+import"./chunk-8tnsngw2.js";
+import"./chunk-jkh5s8ct.js";
+import"./chunk-kwm5bf2m.js";
+import"./chunk-5z28bqne.js";
+import"./chunk-qajrkk97.js";
+import"./chunk-rpbc3b7k.js";
+import"./chunk-fbv4apne.js";
+import {
+  init_state,
+  switchSession
+} from "./chunk-j5xzpm59.js";
+import"./chunk-50dgek10.js";
+import"./chunk-7wm5s02e.js";
+import"./chunk-d3bk85eq.js";
+import"./chunk-cw8rngb2.js";
+import"./chunk-hxhwzgnn.js";
+import"./chunk-qx8z601m.js";
+import"./chunk-cgm6758j.js";
+import"./chunk-3v4d4h0t.js";
+import"./chunk-8pn8tvgg.js";
+import"./chunk-netzwgv1.js";
+import {
+  __toCommonJS,
+  __toESM
+} from "./chunk-qp2qdcda.js";
+
+// src/screens/ResumeConversation.tsx
+init_useTerminalSize();
+init_state();
+init_LogSelector();
+init_Spinner();
+init_cost_tracker();
+init_src();
+init_src();
+init_useKeybinding();
+init_analytics();
+init_AppState();
+init_ids();
+init_agenticSessionSearch();
+var import_react = __toESM(require_react(), 1);
+import { dirname } from "path";
+init_concurrentSessions();
+init_conversationRecovery();
+init_crossProjectResume();
+init_log();
+init_messages();
+init_sessionStorage();
+var jsx_dev_runtime = __toESM(require_jsx_dev_runtime(), 1);
+function parsePrIdentifier(value) {
+  const directNumber = parseInt(value, 10);
+  if (!isNaN(directNumber) && directNumber > 0) {
+    return directNumber;
+  }
+  const urlMatch = value.match(/github\.com\/[^/]+\/[^/]+\/pull\/(\d+)/);
+  if (urlMatch?.[1]) {
+    return parseInt(urlMatch[1], 10);
+  }
+  return null;
+}
+function ResumeConversation({
+  commands,
+  worktreePaths,
+  initialTools,
+  mcpClients,
+  dynamicMcpConfig,
+  debug,
+  mainThreadAgentDefinition,
+  autoConnectIdeFlag,
+  strictMcpConfig = false,
+  systemPrompt,
+  appendSystemPrompt,
+  initialSearchQuery,
+  disableSlashCommands = false,
+  forkSession,
+  taskListId,
+  filterByPr,
+  thinkingConfig,
+  onTurnComplete
+}) {
+  const { rows } = useTerminalSize();
+  const agentDefinitions = useAppState((s) => s.agentDefinitions);
+  const setAppState = useSetAppState();
+  const [logs, setLogs] = import_react.default.useState([]);
+  const [loading, setLoading] = import_react.default.useState(true);
+  const [resuming, setResuming] = import_react.default.useState(false);
+  const [showAllProjects, setShowAllProjects] = import_react.default.useState(false);
+  const [resumeData, setResumeData] = import_react.default.useState(null);
+  const [crossProjectCommand, setCrossProjectCommand] = import_react.default.useState(null);
+  const sessionLogResultRef = import_react.default.useRef(null);
+  const logCountRef = import_react.default.useRef(0);
+  const filteredLogs = import_react.default.useMemo(() => {
+    let result = logs.filter((l) => !l.isSidechain);
+    if (filterByPr !== undefined) {
+      if (filterByPr === true) {
+        result = result.filter((l) => l.prNumber !== undefined);
+      } else if (typeof filterByPr === "number") {
+        result = result.filter((l) => l.prNumber === filterByPr);
+      } else if (typeof filterByPr === "string") {
+        const prNumber = parsePrIdentifier(filterByPr);
+        if (prNumber !== null) {
+          result = result.filter((l) => l.prNumber === prNumber);
+        }
+      }
+    }
+    return result;
+  }, [logs, filterByPr]);
+  const isResumeWithRenameEnabled = isCustomTitleEnabled();
+  import_react.default.useEffect(() => {
+    loadSameRepoMessageLogsProgressive(worktreePaths).then((result) => {
+      sessionLogResultRef.current = result;
+      logCountRef.current = result.logs.length;
+      setLogs(result.logs);
+      setLoading(false);
+    }).catch((error) => {
+      logError(error);
+      setLoading(false);
+    });
+  }, [worktreePaths]);
+  const loadMoreLogs = import_react.default.useCallback((count) => {
+    const ref = sessionLogResultRef.current;
+    if (!ref || ref.nextIndex >= ref.allStatLogs.length)
+      return;
+    enrichLogs(ref.allStatLogs, ref.nextIndex, count).then((result) => {
+      ref.nextIndex = result.nextIndex;
+      if (result.logs.length > 0) {
+        const offset = logCountRef.current;
+        result.logs.forEach((log, i) => {
+          log.value = offset + i;
+        });
+        setLogs((prev) => prev.concat(result.logs));
+        logCountRef.current += result.logs.length;
+      } else if (ref.nextIndex < ref.allStatLogs.length) {
+        loadMoreLogs(count);
+      }
+    });
+  }, []);
+  const loadLogs = import_react.default.useCallback((allProjects) => {
+    setLoading(true);
+    const promise = allProjects ? loadAllProjectsMessageLogsProgressive() : loadSameRepoMessageLogsProgressive(worktreePaths);
+    promise.then((result) => {
+      sessionLogResultRef.current = result;
+      logCountRef.current = result.logs.length;
+      setLogs(result.logs);
+    }).catch((error) => {
+      logError(error);
+    }).finally(() => {
+      setLoading(false);
+    });
+  }, [worktreePaths]);
+  const handleToggleAllProjects = import_react.default.useCallback(() => {
+    const newValue = !showAllProjects;
+    setShowAllProjects(newValue);
+    loadLogs(newValue);
+  }, [showAllProjects, loadLogs]);
+  function onCancel() {
+    process.exit(1);
+  }
+  async function onSelect(log) {
+    setResuming(true);
+    const resumeStart = performance.now();
+    const crossProjectCheck = checkCrossProjectResume(log, showAllProjects, worktreePaths);
+    if (crossProjectCheck.isCrossProject) {
+      if (!crossProjectCheck.isSameRepoWorktree) {
+        const cmd = crossProjectCheck.command;
+        const raw = await setClipboard(cmd);
+        if (raw)
+          process.stdout.write(raw);
+        setCrossProjectCommand(cmd);
+        return;
+      }
+    }
+    try {
+      const result = await loadConversationForResume(log, undefined);
+      if (!result) {
+        throw new Error("Failed to load conversation");
+      }
+      if (false) {}
+      if (result.sessionId && !forkSession) {
+        switchSession(asSessionId(result.sessionId), log.fullPath ? dirname(log.fullPath) : null);
+        await renameRecordingForSession();
+        await resetSessionFilePointer();
+        restoreCostStateForSession(result.sessionId);
+      } else if (forkSession && result.contentReplacements?.length) {
+        await recordContentReplacement(result.contentReplacements);
+      }
+      const { agentDefinition: resolvedAgentDef } = restoreAgentFromSession(result.agentSetting, mainThreadAgentDefinition, agentDefinitions);
+      setAppState((prev) => ({ ...prev, agent: resolvedAgentDef?.agentType }));
+      if (false) {}
+      const standaloneAgentContext = computeStandaloneAgentContext(result.agentName, result.agentColor);
+      if (standaloneAgentContext) {
+        setAppState((prev) => ({ ...prev, standaloneAgentContext }));
+      }
+      updateSessionName(result.agentName);
+      restoreSessionMetadata(forkSession ? { ...result, worktreeSession: undefined } : result);
+      if (!forkSession) {
+        restoreWorktreeForResume(result.worktreeSession);
+        if (result.sessionId) {
+          adoptResumedSessionFile();
+        }
+      }
+      if (true) {
+        (init_persist(), __toCommonJS(exports_persist)).restoreFromEntries(result.contextCollapseCommits ?? [], result.contextCollapseSnapshot);
+      }
+      logEvent("tengu_session_resumed", {
+        entrypoint: "picker",
+        success: true,
+        resume_duration_ms: Math.round(performance.now() - resumeStart)
+      });
+      setLogs([]);
+      setResumeData({
+        messages: result.messages,
+        fileHistorySnapshots: result.fileHistorySnapshots,
+        contentReplacements: result.contentReplacements,
+        agentName: result.agentName,
+        agentColor: result.agentColor === "default" ? undefined : result.agentColor,
+        mainThreadAgentDefinition: resolvedAgentDef
+      });
+    } catch (e) {
+      logEvent("tengu_session_resumed", {
+        entrypoint: "picker",
+        success: false
+      });
+      logError(e);
+      throw e;
+    }
+  }
+  if (crossProjectCommand) {
+    return /* @__PURE__ */ jsx_dev_runtime.jsxDEV(CrossProjectMessage, {
+      command: crossProjectCommand
+    }, undefined, false, undefined, this);
+  }
+  if (resumeData) {
+    return /* @__PURE__ */ jsx_dev_runtime.jsxDEV(REPL, {
+      debug,
+      commands,
+      initialTools,
+      initialMessages: resumeData.messages,
+      initialFileHistorySnapshots: resumeData.fileHistorySnapshots,
+      initialContentReplacements: resumeData.contentReplacements,
+      initialAgentName: resumeData.agentName,
+      initialAgentColor: resumeData.agentColor,
+      mcpClients,
+      dynamicMcpConfig,
+      strictMcpConfig,
+      systemPrompt,
+      appendSystemPrompt,
+      mainThreadAgentDefinition: resumeData.mainThreadAgentDefinition,
+      autoConnectIdeFlag,
+      disableSlashCommands,
+      taskListId,
+      thinkingConfig,
+      onTurnComplete
+    }, undefined, false, undefined, this);
+  }
+  if (loading) {
+    return /* @__PURE__ */ jsx_dev_runtime.jsxDEV(ThemedBox_default, {
+      children: [
+        /* @__PURE__ */ jsx_dev_runtime.jsxDEV(Spinner, {}, undefined, false, undefined, this),
+        /* @__PURE__ */ jsx_dev_runtime.jsxDEV(ThemedText, {
+          children: " Loading conversations\u2026"
+        }, undefined, false, undefined, this)
+      ]
+    }, undefined, true, undefined, this);
+  }
+  if (resuming) {
+    return /* @__PURE__ */ jsx_dev_runtime.jsxDEV(ThemedBox_default, {
+      children: [
+        /* @__PURE__ */ jsx_dev_runtime.jsxDEV(Spinner, {}, undefined, false, undefined, this),
+        /* @__PURE__ */ jsx_dev_runtime.jsxDEV(ThemedText, {
+          children: " Resuming conversation\u2026"
+        }, undefined, false, undefined, this)
+      ]
+    }, undefined, true, undefined, this);
+  }
+  if (filteredLogs.length === 0) {
+    return /* @__PURE__ */ jsx_dev_runtime.jsxDEV(NoConversationsMessage, {}, undefined, false, undefined, this);
+  }
+  return /* @__PURE__ */ jsx_dev_runtime.jsxDEV(LogSelector, {
+    logs: filteredLogs,
+    maxHeight: rows,
+    onCancel,
+    onSelect,
+    onLogsChanged: isResumeWithRenameEnabled ? () => loadLogs(showAllProjects) : undefined,
+    onLoadMore: loadMoreLogs,
+    initialSearchQuery,
+    showAllProjects,
+    onToggleAllProjects: handleToggleAllProjects,
+    onAgenticSearch: agenticSessionSearch
+  }, undefined, false, undefined, this);
+}
+function NoConversationsMessage() {
+  useKeybinding("app:interrupt", () => {
+    process.exit(1);
+  }, { context: "Global" });
+  return /* @__PURE__ */ jsx_dev_runtime.jsxDEV(ThemedBox_default, {
+    flexDirection: "column",
+    children: [
+      /* @__PURE__ */ jsx_dev_runtime.jsxDEV(ThemedText, {
+        children: "No conversations found to resume."
+      }, undefined, false, undefined, this),
+      /* @__PURE__ */ jsx_dev_runtime.jsxDEV(ThemedText, {
+        dimColor: true,
+        children: "Press Ctrl+C to exit and start a new conversation."
+      }, undefined, false, undefined, this)
+    ]
+  }, undefined, true, undefined, this);
+}
+function CrossProjectMessage({
+  command
+}) {
+  import_react.default.useEffect(() => {
+    const timeout = setTimeout(() => {
+      process.exit(0);
+    }, 100);
+    return () => clearTimeout(timeout);
+  }, []);
+  return /* @__PURE__ */ jsx_dev_runtime.jsxDEV(ThemedBox_default, {
+    flexDirection: "column",
+    gap: 1,
+    children: [
+      /* @__PURE__ */ jsx_dev_runtime.jsxDEV(ThemedText, {
+        children: "This conversation is from a different directory."
+      }, undefined, false, undefined, this),
+      /* @__PURE__ */ jsx_dev_runtime.jsxDEV(ThemedBox_default, {
+        flexDirection: "column",
+        children: [
+          /* @__PURE__ */ jsx_dev_runtime.jsxDEV(ThemedText, {
+            children: "To resume, run:"
+          }, undefined, false, undefined, this),
+          /* @__PURE__ */ jsx_dev_runtime.jsxDEV(ThemedText, {
+            children: [
+              " ",
+              command
+            ]
+          }, undefined, true, undefined, this)
+        ]
+      }, undefined, true, undefined, this),
+      /* @__PURE__ */ jsx_dev_runtime.jsxDEV(ThemedText, {
+        dimColor: true,
+        children: "(Command copied to clipboard)"
+      }, undefined, false, undefined, this)
+    ]
+  }, undefined, true, undefined, this);
+}
+export {
+  ResumeConversation
+};

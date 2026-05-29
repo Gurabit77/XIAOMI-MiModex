@@ -1,0 +1,74 @@
+{
+  "$schema": "../gen/schemas/desktop-schema.json",
+  "identifier": "default",
+  "description": "Main MiModex window permissions.",
+  "windows": ["main"],
+  "permissions": [
+    "core:default",
+    "core:window:allow-start-dragging",
+    "shell:allow-open",
+    {
+      "identifier": "shell:allow-execute",
+      "allow": [
+        {
+          "name": "mimo",
+          "cmd": "mimo",
+          "args": true
+        },
+        {
+          "name": "mimo.cmd",
+          "cmd": "mimo.cmd",
+          "args": true
+        },
+        {
+          "name": "mimo.exe",
+          "cmd": "mimo.exe",
+          "args": true
+        },
+        {
+          "name": "bin/mimo-code-engine",
+          "sidecar": true,
+          "args": true
+        }
+      ]
+    },
+    {
+      "identifier": "shell:allow-spawn",
+      "allow": [
+        {
+          "name": "mimo",
+          "cmd": "mimo",
+          "args": true
+        },
+        {
+          "name": "mimo.cmd",
+          "cmd": "mimo.cmd",
+          "args": true
+        },
+        {
+          "name": "mimo.exe",
+          "cmd": "mimo.exe",
+          "args": true
+        },
+        {
+          "name": "bin/mimo-code-engine",
+          "sidecar": true,
+          "args": true
+        }
+      ]
+    },
+    "shell:allow-kill",
+    "shell:allow-stdin-write",
+    "fs:allow-mkdir",
+    "fs:allow-read-text-file",
+    "fs:allow-write-text-file",
+    {
+      "identifier": "fs:scope",
+      "allow": [
+        "$HOME/.mimo",
+        "$HOME/.mimo/**"
+      ]
+    },
+    "dialog:default"
+  ]
+}

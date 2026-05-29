@@ -1,0 +1,116 @@
+/* ============================================================
+   MiModex — ChatArea
+   ============================================================ */
+
+.chat-area {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  height: auto;
+  position: relative;
+}
+
+/* ---- 消息滚动区 ---- */
+.chat-messages {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: var(--space-lg) 0 var(--space-xl);
+  scroll-behavior: smooth;
+}
+
+.chat-messages-inner {
+  width: 100%;
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: var(--space-lg) 0 calc(var(--space-2xl) + 12px);
+  box-sizing: border-box;
+  min-width: 0;
+  overflow-x: hidden;
+}
+
+.chat-messages--short .chat-messages-inner {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding-top: clamp(18px, 4vh, 42px);
+  padding-bottom: clamp(96px, 14vh, 136px);
+}
+
+.chat-messages--short .chat-new-conversation {
+  min-height: 260px;
+  padding-top: var(--space-xl);
+  padding-bottom: var(--space-xl);
+}
+
+/* ---- New conversation empty state ---- */
+.chat-new-icons {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-sm);
+}
+
+.chat-new-conversation {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-2xl) var(--space-xl);
+  text-align: center;
+  animation: fadeIn 500ms var(--ease-smooth);
+}
+
+.chat-new-loading {
+  width: 180px;
+  height: 160px;
+  margin-bottom: var(--space-md);
+}
+
+.chat-new-hint {
+  font-size: var(--font-size-base);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-md);
+  font-weight: var(--font-weight-normal);
+}
+
+/* ---- 日期分隔符 ---- */
+.chat-date-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-lg) var(--space-xl);
+}
+
+.chat-date-divider-line {
+  flex: 1;
+  height: 1px;
+  background: var(--color-border-light);
+  opacity: 0.55;
+}
+
+.chat-date-divider-text {
+  padding: 0 var(--space-md);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-disabled);
+  white-space: nowrap;
+}
+
+/* ---- Scroll to bottom fab ---- */
+.chat-scroll-bottom-wrap {
+  position: absolute;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 5;
+  animation: springBounce 300ms var(--ease-spring);
+}
+
+.chat-scroll-bottom-label {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  white-space: nowrap;
+}

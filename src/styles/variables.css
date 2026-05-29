@@ -1,0 +1,132 @@
+/* ============================================================
+   MiModex — CSS Design Tokens (Animal Island + Apple fusion)
+   ============================================================ */
+
+:root {
+  /* ---- Color Palette ---- */
+  --color-bg-primary: #f8f8f0;
+  --color-bg-warm: rgb(247, 243, 223);
+  --color-bg-sidebar: rgba(247, 243, 223, 0.85);
+  --color-bg-input: #ffffff;
+  --color-bg-hover: rgba(183, 198, 229, 0.3);
+  --color-bg-active: #b7c6e5;
+  --color-bg-message-user: #889df0;
+  --color-bg-message-ai: rgb(247, 243, 223);
+  --color-bg-code: #2b2118;
+  --color-bg-titlebar: rgba(247, 243, 223, 0.72);
+  --color-bg-overlay: rgba(0, 0, 0, 0.2);
+
+  --color-text-primary: #794f27;
+  --color-text-body: #5f4f38;
+  --color-text-secondary: #746850;
+  --color-text-muted: #6f604c;
+  --color-text-disabled: #c4b89e;
+  --color-text-inverse: #ffffff;
+  --color-text-code: #e6d8c3;
+
+  --color-accent-teal: #19c8b9;
+  --color-accent-teal-hover: #3dd4c6;
+  --color-accent-teal-active: #11a89b;
+  --color-accent-yellow: #ffcc00;
+  --color-accent-yellow-dark: #e0b800;
+  --color-accent-orange: #e59266;
+  --color-accent-pink: #f8a6b2;
+  --color-accent-blue: #889df0;
+  --color-accent-green: #8ac68a;
+  --color-accent-red: #e05a5a;
+  --color-accent-purple: #b77dee;
+
+  --color-border: #9f927d;
+  --color-border-light: #c4b89e;
+  --color-border-focus: #ffcc00;
+
+  --color-shadow: rgba(107, 92, 67, 0.42);
+  --color-shadow-light: rgba(114, 93, 66, 0.15);
+  --color-shadow-button: #bdaea0;
+
+  /* ---- Typography (inherits Animal Island UI fonts) ---- */
+  --font-family: var(--animal-font-family, Nunito, "Noto Sans SC", "Zen Maru Gothic", -apple-system,
+    "PingFang SC", system-ui, sans-serif);
+  --font-size-xs: 12px;
+  --font-size-sm: 14px;
+  --font-size-base: 15px;
+  --font-size-md: 16px;
+  --font-size-lg: 18px;
+  --font-size-xl: 20px;
+  --font-size-2xl: 24px;
+  --font-size-3xl: 32px;
+  --font-weight-normal: 500;
+  --font-weight-medium: 600;
+  --font-weight-bold: 700;
+  --font-weight-heavy: 800;
+  --line-height: 1.6;
+  --letter-spacing: 0;
+
+  /* ---- Spacing ---- */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 12px;
+  --space-base: 16px;
+  --space-lg: 20px;
+  --space-xl: 24px;
+  --space-2xl: 32px;
+  --space-3xl: 48px;
+
+  /* ---- Radius ---- */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --radius-xl: 20px;
+  --radius-pill: 50px;
+  --radius-card: 20px;
+  --radius-modal: 24px;
+  --radius-bubble: 22px;
+
+  /* ---- Shadows (Animal Island 3D style) ---- */
+  --shadow-button: 0 5px 0 0 var(--color-shadow-button);
+  --shadow-button-hover: 0 6px 0 0 var(--color-shadow-button);
+  --shadow-button-active: 0 1px 0 0 var(--color-shadow-button);
+  --shadow-card: 0 4px 10px var(--color-shadow);
+  --shadow-card-hover: 0 8px 24px var(--color-shadow-light);
+  --shadow-float: 0 12px 40px rgba(107, 92, 67, 0.18);
+  --shadow-input: 0 3px 0 0 #d4c9b4;
+
+  /* ---- Transitions (Apple-grade spring feel) ---- */
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-smooth: cubic-bezier(0.25, 0.1, 0.25, 1);
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --duration-fast: 150ms;
+  --duration-normal: 250ms;
+  --duration-slow: 400ms;
+  --duration-spring: 500ms;
+
+  /* ---- Layout ---- */
+  --left-panel-width: 300px;
+  --right-panel-width: 320px;
+  --titlebar-height: 52px;
+  --statusbar-height: 32px;
+  --input-bar-height: 176px;
+
+  /* ---- Z-index layers ---- */
+  --z-base: 0;
+  --z-sidebar: 10;
+  --z-titlebar: 20;
+  --z-modal: 100;
+  --z-toast: 200;
+}
+
+@media (max-width: 1100px) {
+  :root {
+    --left-panel-width: 240px;
+    --right-panel-width: 280px;
+  }
+}
+
+@media (max-width: 820px) {
+  :root {
+    --left-panel-width: 220px;
+    --right-panel-width: 260px;
+    --titlebar-height: 48px;
+  }
+}

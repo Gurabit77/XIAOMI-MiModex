@@ -1,0 +1,276 @@
+.mimo-island-loader {
+  --loader-stage: 96px;
+  --loader-radius: 24px;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+
+.mimo-island-loader--sm {
+  --loader-stage: 66px;
+  --loader-radius: 18px;
+}
+
+.mimo-island-loader--lg {
+  --loader-stage: 128px;
+  --loader-radius: 30px;
+}
+
+.mimo-island-loader-stage {
+  position: relative;
+  width: var(--loader-stage);
+  height: var(--loader-stage);
+  display: grid;
+  place-items: center;
+  border: 2px solid rgba(25, 200, 185, 0.24);
+  border-radius: var(--loader-radius);
+  background:
+    radial-gradient(circle at 17% 18%, rgba(255, 204, 0, 0.24), transparent 19%),
+    linear-gradient(180deg, rgba(186, 228, 240, 0.78), rgba(230, 249, 246, 0.92) 56%, rgba(130, 213, 187, 0.42));
+  box-shadow: inset 0 -8px 0 rgba(25, 200, 185, 0.08), 0 4px 0 rgba(212, 201, 180, 0.74);
+  overflow: hidden;
+  contain: paint;
+  isolation: isolate;
+}
+
+.mimo-island-loader-illustration {
+  position: absolute;
+  left: 15%;
+  right: 15%;
+  top: 23%;
+  bottom: 20%;
+  display: grid;
+  place-items: center;
+  z-index: 2;
+}
+
+.mimo-island-loader-badge {
+  position: absolute;
+  right: 8px;
+  top: 8px;
+  z-index: 4;
+  width: 26px;
+  height: 26px;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  background: rgba(255, 253, 246, 0.92);
+  box-shadow: 0 2px 0 rgba(189, 174, 160, 0.72);
+}
+
+.mimo-island-loader--sm .mimo-island-loader-badge {
+  right: 6px;
+  top: 6px;
+  width: 22px;
+  height: 22px;
+  border-radius: 10px;
+}
+
+.mimo-island-loader-sun,
+.mimo-island-loader-cloud,
+.mimo-island-loader-island,
+.mimo-island-loader-wave {
+  position: absolute;
+  pointer-events: none;
+}
+
+.mimo-island-loader-sun {
+  left: 10px;
+  top: 10px;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: #ffcc00;
+  box-shadow: 0 0 0 6px rgba(255, 204, 0, 0.12);
+  animation: mimoLoaderSun 2.4s ease-in-out infinite;
+}
+
+.mimo-island-loader-cloud {
+  width: 20px;
+  height: 8px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.84);
+  box-shadow:
+    8px -1px 0 rgba(255, 255, 255, 0.76),
+    15px 2px 0 rgba(255, 255, 255, 0.64);
+  z-index: 1;
+}
+
+.mimo-island-loader-cloud--one {
+  right: 16px;
+  top: 24px;
+  animation: mimoLoaderCloud 4.2s ease-in-out infinite;
+}
+
+.mimo-island-loader-cloud--two {
+  left: 8px;
+  top: 38px;
+  width: 14px;
+  opacity: 0.68;
+  animation: mimoLoaderCloud 5s ease-in-out infinite reverse;
+}
+
+.mimo-island-loader-island {
+  left: 20%;
+  right: 20%;
+  bottom: 18px;
+  height: 12px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #abd25e 0%, #78bb4d 62%, #f7cd67 63%, #e59266 100%);
+  box-shadow: 0 3px 0 rgba(229, 177, 59, 0.32);
+  z-index: 3;
+  animation: mimoLoaderFloat 1.9s ease-in-out infinite;
+}
+
+.mimo-island-loader-tree {
+  position: relative;
+  width: 34px;
+  height: 42px;
+  display: block;
+  box-sizing: border-box;
+  overflow: hidden;
+  contain: layout paint inline-size;
+  transform-origin: 50% 100%;
+  animation: mimoLoaderTree 2.2s ease-in-out infinite;
+}
+
+.mimo-island-loader-tree * {
+  max-width: 100%;
+}
+
+.mimo-island-loader--sm .mimo-island-loader-tree {
+  width: 26px;
+  height: 34px;
+}
+
+.mimo-island-loader-trunk,
+.mimo-island-loader-leaf,
+.mimo-island-loader-fish {
+  position: absolute;
+  display: block;
+}
+
+.mimo-island-loader-trunk {
+  left: 50%;
+  bottom: 1px;
+  width: 9px;
+  height: 24px;
+  border-radius: 6px 6px 3px 3px;
+  background: linear-gradient(180deg, #e5b13b, #c68e2d);
+  transform: translateX(-50%);
+  box-shadow: inset 2px 0 rgba(255, 253, 246, 0.22);
+}
+
+.mimo-island-loader-leaf {
+  width: 20px;
+  height: 16px;
+  border-radius: 70% 35% 70% 35%;
+  background: #8cc751;
+  box-shadow: inset -3px -2px rgba(90, 158, 30, 0.12);
+  transform-origin: 55% 75%;
+}
+
+.mimo-island-loader-leaf--one {
+  left: 3px;
+  top: 8px;
+  transform: rotate(-30deg);
+}
+
+.mimo-island-loader-leaf--two {
+  right: 3px;
+  top: 8px;
+  background: #abd25e;
+  transform: rotate(28deg);
+  animation-delay: 140ms;
+}
+
+.mimo-island-loader-leaf--three {
+  left: 7px;
+  top: 0;
+  background: #78bb4d;
+  transform: rotate(4deg);
+  animation-delay: 260ms;
+}
+
+.mimo-island-loader-fish {
+  left: -8px;
+  bottom: -3px;
+  width: 15px;
+  height: 8px;
+  border-radius: 70% 45% 45% 70%;
+  background: #2ec3ec;
+  box-shadow: -4px 2px 0 -1px #0793b8;
+  animation: mimoLoaderFish 2.4s ease-in-out infinite;
+}
+
+.mimo-island-loader-wave {
+  left: 10px;
+  right: 10px;
+  height: 5px;
+  border-radius: 999px;
+  background:
+    repeating-linear-gradient(
+      90deg,
+      rgba(25, 200, 185, 0.5),
+      rgba(25, 200, 185, 0.5) 8px,
+      rgba(255, 255, 255, 0.68) 8px,
+      rgba(255, 255, 255, 0.68) 15px
+    );
+  background-size: 30px 5px;
+  z-index: 3;
+}
+
+.mimo-island-loader-wave--one {
+  bottom: 8px;
+  animation: mimoLoaderWave 1.1s linear infinite;
+}
+
+.mimo-island-loader-wave--two {
+  bottom: 14px;
+  opacity: 0.7;
+  animation: mimoLoaderWave 1.5s linear infinite reverse;
+}
+
+.mimo-island-loader-label {
+  max-width: 100%;
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-bold);
+  line-height: 1.25;
+  text-align: center;
+}
+
+@keyframes mimoLoaderSun {
+  0%, 100% { transform: scale(0.92); }
+  50% { transform: scale(1.08); }
+}
+
+@keyframes mimoLoaderCloud {
+  0%, 100% { transform: translateX(-4px); }
+  50% { transform: translateX(5px); }
+}
+
+@keyframes mimoLoaderFloat {
+  0%, 100% { transform: translateY(1px) scaleX(0.94); }
+  50% { transform: translateY(-3px) scaleX(1.04); }
+}
+
+@keyframes mimoLoaderTree {
+  0%, 100% { transform: translateY(0) rotate(-1deg); }
+  50% { transform: translateY(-3px) rotate(2deg); }
+}
+
+@keyframes mimoLoaderFish {
+  0% { transform: translateX(0) translateY(0) scaleX(1); opacity: 0; }
+  15% { opacity: 0.85; }
+  55% { transform: translateX(22px) translateY(-4px) scaleX(1); opacity: 1; }
+  56% { transform: translateX(22px) translateY(-4px) scaleX(-1); }
+  100% { transform: translateX(2px) translateY(0) scaleX(-1); opacity: 0; }
+}
+
+@keyframes mimoLoaderWave {
+  from { background-position: 0 0; }
+  to { background-position: 30px 0; }
+}

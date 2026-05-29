@@ -1,0 +1,57 @@
+# Dependencies
+node_modules/
+packages/*/node_modules/
+
+# Frontend build output
+dist/
+*.tsbuildinfo
+
+# Vendored runtime/library bundles required by source builds
+!packages/animal-island-ui/dist/
+!packages/animal-island-ui/dist/**
+!src-tauri/resources/mimo-code/dist/
+!src-tauri/resources/mimo-code/dist/**
+
+# Tauri/Rust build output
+target/
+src-tauri/target/
+src-tauri/target-*/
+src-tauri/gen/
+
+# Generated non-default sidecars are release artifacts, not source files
+src-tauri/bin/mimo-code-engine-x86_64-apple-darwin
+src-tauri/bin/mimo-code-engine-x86_64-pc-windows-msvc.exe
+
+# Local environment and secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.p12
+*.key
+*.mobileprovision
+*.provisionprofile
+
+# Local app data and test artifacts
+.mimo/
+.codex-e2e/
+.codex-screenshots/
+.e2e-output/
+output/
+release/
+tmp/
+
+# Logs and OS/editor files
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.DS_Store
+.idea/
+.vscode/
+
+# macOS packaging byproducts
+*.dmg
+*.zip
+*.app
