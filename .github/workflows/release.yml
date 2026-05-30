@@ -30,7 +30,7 @@ jobs:
             artifact_name: MiModex-macOS-Intel
             build_script: tauri:build:signed
           - label: Windows x64
-            os: windows-latest
+            os: windows-2022
             sidecar_target: x86_64-pc-windows-msvc
             sidecar_file: mimo-code-engine-x86_64-pc-windows-msvc.exe
             artifact_name: MiModex-Windows-x64
@@ -59,6 +59,13 @@ jobs:
 
       - name: Prepare bundled MiModex engine
         run: node scripts/ensure-sidecar.mjs --target=${{ matrix.sidecar_target }} --force
+
+      - name: Install Windows packaging dependencies
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          choco install nsis -y --no-progress
+          makensis -VERSION
 
       - name: Build desktop package
         run: npm run ${{ matrix.build_script }}
