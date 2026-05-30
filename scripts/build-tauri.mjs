@@ -9,15 +9,18 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const rawArgs = process.argv.slice(2);
 const { value: requestedBundles, args } = extractOption(rawArgs, "--bundles");
 const bundles = process.env.MIMODEX_TAURI_BUNDLES || requestedBundles || defaultBundles();
-const npm = process.platform === "win32" ? "npm.cmd" : "npm";
+const npm = "npm";
 
 const result = spawnSync(
   npm,
   ["run", "tauri", "--", "build", "--bundles", bundles, "--ci", ...args],
-  { cwd: ROOT, stdio: "inherit" },
+  { cwd: ROOT, stdio: "inherit", shell: process.platform === "win32" },
 );
 
 if (result.status !== 0) {
+  if (result.error) {
+    console.error(`[MiModex] failed to start Tauri build: ${result.error.message}`);
+  }
   process.exit(result.status ?? 1);
 }
 
