@@ -20,9 +20,7 @@
         "minHeight": 760,
         "center": true,
         "decorations": true,
-        "transparent": false,
-        "titleBarStyle": "Overlay",
-        "hiddenTitle": true
+        "transparent": false
       }
     ],
     "security": {
@@ -31,7 +29,7 @@
   },
   "bundle": {
     "active": true,
-    "targets": ["app"],
+    "targets": ["nsis"],
     "externalBin": [
       "bin/mimo-code-engine"
     ],

@@ -1,0 +1,21 @@
+{
+  "app": {
+    "windows": [
+      {
+        "title": "MiModex",
+        "width": 1500,
+        "height": 1000,
+        "minWidth": 1180,
+        "minHeight": 760,
+        "center": true,
+        "decorations": true,
+        "transparent": false,
+        "titleBarStyle": "Overlay",
+        "hiddenTitle": true
+      }
+    ]
+  },
+  "bundle": {
+    "targets": ["app"]
+  }
+}
