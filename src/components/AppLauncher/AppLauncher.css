@@ -607,12 +607,15 @@
   }
 
   .app-launcher-head {
-    grid-template-columns: 46px minmax(0, 1fr);
+    grid-template-columns: 46px minmax(0, 1fr) auto;
+    gap: 8px;
   }
 
   .app-launcher-head > button {
-    grid-column: 1 / -1;
-    justify-self: stretch;
+    grid-column: auto;
+    justify-self: end;
+    min-width: 34px;
+    padding-inline: 8px !important;
   }
 
   .app-launcher-logo {
@@ -629,7 +632,61 @@
   }
 }
 
+@media (max-height: 560px) {
+  .app-launcher-layer {
+    padding: 42px 10px 18px;
+  }
+
+  .app-launcher-phone {
+    max-height: calc(100vh - 58px);
+    gap: 8px;
+    padding: 12px;
+    border-radius: 34px;
+  }
+
+  .app-launcher-head {
+    padding-block: 2px;
+  }
+
+  .app-launcher-copy p {
+    display: none;
+  }
+
+  .app-launcher-copy h2 {
+    font-size: 22px;
+  }
+
+  .app-launcher-route-board {
+    gap: 6px;
+    padding: 8px;
+    border-radius: 22px;
+  }
+
+  .app-launcher-route {
+    min-height: 62px;
+    grid-template-columns: 40px minmax(0, 1fr) auto;
+    gap: 7px;
+    padding: 7px 9px;
+    border-radius: 20px;
+  }
+
+  .app-launcher-route-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 16px;
+  }
+}
+
 @media (max-width: 420px) {
+  .app-launcher-head {
+    grid-template-columns: 46px minmax(0, 1fr);
+  }
+
+  .app-launcher-head > button {
+    grid-column: 1 / -1;
+    justify-self: stretch;
+  }
+
   .app-launcher-grid {
     grid-template-columns: 1fr;
   }

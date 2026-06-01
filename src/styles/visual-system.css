@@ -1297,3 +1297,75 @@ body:has(.settings-page) [class*="modalClipped"] {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-1px); }
 }
+
+@media (max-height: 560px) {
+  .input-bar {
+    padding: 0 10px 6px;
+    max-height: min(34vh, 190px);
+  }
+
+  .input-console,
+  .input-bar--compact .input-console {
+    display: block;
+    margin: 0 4px 4px;
+    padding: 4px 6px;
+    border-radius: 16px;
+  }
+
+  .input-console-title,
+  .input-context-link,
+  .input-console-route,
+  .input-console-stepper,
+  .input-bar-hint {
+    display: none;
+  }
+
+  .input-console-head {
+    justify-content: flex-end;
+  }
+
+  .input-console-actions {
+    width: 100%;
+    justify-content: flex-end;
+    gap: 4px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .input-console-actions::-webkit-scrollbar {
+    display: none;
+  }
+
+  .input-mode-chip,
+  .input-permission-chip,
+  .input-bar--compact .input-mode-chip,
+  .input-bar--compact .input-permission-chip {
+    flex: 0 0 auto;
+    min-height: 26px;
+    padding: 2px 7px;
+    font-size: 12px;
+  }
+
+  .input-bar-container {
+    min-height: 48px;
+    padding: 5px 8px;
+    border-radius: 22px;
+  }
+
+  .input-bar-textarea {
+    min-height: 24px;
+    max-height: 56px;
+    padding: 4px 0;
+  }
+}
+
+@media (max-width: 760px) and (max-height: 560px) {
+  .input-console-head {
+    align-items: center;
+    flex-direction: row;
+  }
+
+  .input-console-actions {
+    display: flex;
+  }
+}

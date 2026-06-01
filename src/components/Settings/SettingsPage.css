@@ -1289,6 +1289,120 @@ body:has(.settings-page) [class*="modalClipped"] > [class*="body"] {
   }
 }
 
+@media (max-height: 680px) {
+  body:has(.settings-page) [class*="modalClipped"] {
+    padding: 12px 16px 12px !important;
+    max-height: calc(100vh - 20px) !important;
+  }
+
+  .settings-page {
+    max-height: calc(100vh - 44px);
+    padding: 8px 12px 12px;
+  }
+
+  .settings-page-header {
+    margin-bottom: 8px;
+  }
+
+  .settings-page-icon {
+    width: 30px;
+    height: 30px;
+    flex-basis: 30px;
+  }
+
+  .settings-page-title {
+    font-size: 19px;
+  }
+
+  .settings-shell {
+    max-height: calc(100vh - 108px);
+    gap: 10px;
+  }
+
+  .settings-side-nav {
+    padding: 8px;
+  }
+
+  .settings-side-nav-item {
+    min-height: 46px;
+    padding: 6px 7px;
+  }
+}
+
+@media (max-height: 560px) {
+  body:has(.settings-page) [class*="modalClipped"] {
+    padding: 8px 12px 10px !important;
+  }
+
+  .settings-page {
+    max-height: calc(100vh - 28px);
+    padding: 7px 10px 10px;
+  }
+
+  .settings-page-kicker,
+  .settings-side-nav-copy small {
+    display: none;
+  }
+
+  .settings-shell {
+    max-height: calc(100vh - 82px);
+  }
+
+  .settings-side-nav-item {
+    min-height: 38px;
+  }
+}
+
+@media (max-width: 760px) and (max-height: 560px) {
+  .settings-page-header {
+    margin: 0 4px 6px;
+  }
+
+  .settings-page-actions {
+    width: auto;
+    margin-left: auto;
+  }
+
+  .settings-shell {
+    max-height: calc(100vh - 74px);
+    gap: 7px;
+  }
+
+  .settings-side-nav {
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    gap: 4px;
+    padding: 5px;
+    overflow: hidden;
+    border-radius: 14px;
+  }
+
+  .settings-side-nav-item {
+    min-height: 34px;
+    padding: 4px 3px;
+    gap: 3px;
+    grid-template-columns: 22px minmax(0, auto);
+    justify-content: center;
+    border-width: 1px;
+    border-radius: 11px;
+  }
+
+  .settings-side-nav-icon {
+    width: 22px;
+    height: 22px;
+    border-radius: 9px;
+  }
+
+  .settings-side-nav-copy strong {
+    font-size: 12px;
+    line-height: 1.05;
+  }
+
+  .settings-shell-content {
+    padding-bottom: 10px;
+    border-radius: 14px;
+  }
+}
+
 /* ---- Shortcuts ---- */
 .settings-shortcuts-list {
   display: flex;

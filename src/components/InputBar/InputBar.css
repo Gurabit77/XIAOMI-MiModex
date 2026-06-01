@@ -1452,3 +1452,129 @@
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
+
+@media (max-height: 680px) {
+  .input-bar {
+    padding: 0 16px 8px;
+    max-height: min(34vh, 240px);
+  }
+
+  .input-console {
+    margin-bottom: 5px;
+    padding: 6px 9px;
+    border-radius: 18px;
+  }
+
+  .input-console-route,
+  .input-console-stepper,
+  .input-console-summary-sub,
+  .input-bar-hint {
+    display: none;
+  }
+
+  .input-console-head {
+    gap: 6px;
+  }
+
+  .input-console-orb {
+    width: 28px;
+    height: 28px;
+    border-radius: 12px;
+  }
+
+  .input-console-title {
+    min-height: 28px;
+  }
+
+  .input-mode-chip,
+  .input-permission-chip {
+    min-height: 28px;
+    padding-block: 3px;
+    padding-inline: 8px;
+  }
+
+  .input-bar-container {
+    min-height: 52px;
+    padding: 6px 10px;
+    border-radius: 22px;
+  }
+
+  .input-bar-textarea {
+    min-height: 26px;
+    max-height: 70px;
+    padding: 4px 0;
+  }
+}
+
+@media (max-height: 560px) {
+  .input-bar {
+    padding: 0 10px 6px;
+    max-height: min(34vh, 190px);
+  }
+
+  .input-console {
+    display: block;
+    margin-bottom: 4px;
+    padding: 4px 6px;
+    border-radius: 16px;
+  }
+
+  .input-bar--compact .input-console {
+    margin-bottom: 4px;
+    padding: 4px 6px;
+    border-radius: 16px;
+  }
+
+  .input-bar-container {
+    min-height: 48px;
+    padding: 5px 8px;
+  }
+
+  .input-bar-textarea {
+    min-height: 24px;
+    max-height: 56px;
+  }
+
+  .input-bar-actions {
+    gap: 4px;
+  }
+
+  .input-console-title,
+  .input-context-link,
+  .input-console-route {
+    display: none;
+  }
+
+  .input-console-head {
+    justify-content: flex-end;
+  }
+
+  .input-console-actions {
+    width: 100%;
+    justify-content: flex-end;
+    gap: 4px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .input-console-actions::-webkit-scrollbar {
+    display: none;
+  }
+
+  .input-mode-chip,
+  .input-permission-chip {
+    flex: 0 0 auto;
+    min-height: 26px;
+    padding-block: 2px;
+    padding-inline: 7px;
+    font-size: 12px;
+  }
+
+  .input-bar--compact .input-mode-chip,
+  .input-bar--compact .input-permission-chip {
+    min-height: 26px;
+    padding-block: 2px;
+    padding-inline: 7px;
+    font-size: 12px;
+  }
+}

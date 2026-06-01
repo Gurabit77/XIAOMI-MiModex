@@ -365,3 +365,41 @@
     margin-left: 0;
   }
 }
+
+@media (max-height: 680px) {
+  .titlebar {
+    padding-inline: 8px;
+  }
+
+  .titlebar-clock,
+  .titlebar-action-label {
+    display: none;
+  }
+
+  .titlebar-left [class*="btn"],
+  .titlebar-right [class*="btn"] {
+    min-width: 34px !important;
+    height: 32px;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    justify-content: center;
+  }
+
+  .titlebar-brand {
+    min-height: 28px;
+  }
+}
+
+@media (max-height: 560px) {
+  .titlebar-brand {
+    display: none;
+  }
+
+  .titlebar-traffic-lights-spacer {
+    width: 48px;
+  }
+
+  .titlebar-controls {
+    max-width: min(300px, 48vw);
+  }
+}

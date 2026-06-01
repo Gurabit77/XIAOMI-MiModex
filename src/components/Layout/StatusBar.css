@@ -179,3 +179,28 @@
     display: none;
   }
 }
+
+@media (max-height: 680px) {
+  .statusbar {
+    font-size: 12px;
+    padding-inline: 10px;
+  }
+
+  .statusbar-runtime,
+  .statusbar-effort,
+  .statusbar-session {
+    display: none;
+  }
+}
+
+@media (max-height: 560px) {
+  .statusbar-token-bar,
+  .statusbar-token-text,
+  .statusbar-right {
+    display: none;
+  }
+
+  .statusbar-left {
+    min-width: 0;
+  }
+}

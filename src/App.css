@@ -6,7 +6,9 @@
   display: flex;
   flex-direction: column;
   height: 100vh;
+  height: 100dvh;
   width: 100vw;
+  width: 100dvw;
   overflow: hidden;
   background: var(--color-bg-primary);
 }
@@ -285,6 +287,32 @@
     left: 6px;
     right: 6px;
     animation-name: appPanelSlideUp;
+  }
+}
+
+@media (max-height: 680px) {
+  .app-body {
+    padding: 0 10px 6px;
+    gap: 10px;
+  }
+
+  .app-main {
+    border-radius: 16px 16px 0 0;
+  }
+
+  .setup-gate {
+    padding: var(--space-base);
+  }
+}
+
+@media (max-height: 560px) {
+  .app-body {
+    padding: 0 8px 5px;
+    gap: 8px;
+  }
+
+  .app-footer-decoration {
+    display: none;
   }
 }
 

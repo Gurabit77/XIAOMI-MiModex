@@ -130,3 +130,26 @@
     --titlebar-height: 48px;
   }
 }
+
+@media (max-height: 680px) {
+  :root {
+    --titlebar-height: 46px;
+    --statusbar-height: 28px;
+    --input-bar-height: 132px;
+    --space-base: 14px;
+    --space-lg: 16px;
+    --space-xl: 20px;
+  }
+}
+
+@media (max-height: 560px) {
+  :root {
+    --titlebar-height: 42px;
+    --statusbar-height: 24px;
+    --input-bar-height: 112px;
+    --space-md: 10px;
+    --space-base: 12px;
+    --space-lg: 14px;
+    --space-xl: 16px;
+  }
+}
