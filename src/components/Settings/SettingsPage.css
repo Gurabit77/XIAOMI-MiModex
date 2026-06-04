@@ -892,6 +892,7 @@ body:has(.settings-page) [class*="modalClipped"] > [class*="body"] {
 
 .settings-row > [class*="wrapper"],
 .settings-row > [class*="animal-select"],
+.settings-row > .adaptive-select,
 .settings-row > div:not(.settings-label) {
   min-width: 0;
   max-width: 100%;

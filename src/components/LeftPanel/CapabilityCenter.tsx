@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { Button, Card, Collapse, Icon, Select, Tabs } from "animal-island-ui";
+import { Button, Card, Collapse, Icon, Tabs } from "animal-island-ui";
 import type { CardColor } from "animal-island-ui";
 import { useAppStore } from "@/stores/appStore";
 import { useSessionStore } from "@/stores/sessionStore";
@@ -8,6 +8,7 @@ import { audioObjectUrl, runWebSearch, synthesizeSpeech, understandMultimodal } 
 import { explainError } from "@/services/errorExplain";
 import { GeneratedAudioCard } from "@/components/Audio/GeneratedAudioCard";
 import { IslandLoader } from "@/components/Common/IslandLoader";
+import { AdaptiveSelect as Select } from "@/components/Common/AdaptiveSelect";
 import {
   CODING_CAPABILITIES,
   MIMO_CODE_MODELS,

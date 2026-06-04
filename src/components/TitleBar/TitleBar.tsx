@@ -7,9 +7,10 @@ import { useSessionStore } from "@/stores/sessionStore";
 import { getCurrentWindow } from "@tauri-apps/api/window";
 import { useCallback, useEffect, useState } from "react";
 import type { PointerEvent } from "react";
-import { Button, Icon, Select, Switch } from "animal-island-ui";
+import { Button, Icon, Switch } from "animal-island-ui";
 import type { EffortLevel } from "@/types";
 import { MIMO_CODE_MODELS } from "@/constants/mimoCapabilities";
+import { AdaptiveSelect as Select } from "@/components/Common/AdaptiveSelect";
 import "./TitleBar.css";
 
 const WEEKDAYS_ZH = ["周日", "周一", "周二", "周三", "周四", "周五", "周六"];
@@ -125,11 +126,13 @@ export function TitleBar() {
             />
           </div>
           <Select
+            className="titlebar-model-select"
             options={MODEL_OPTIONS}
             value={currentModel}
             onChange={(key) => setModel(key)}
           />
           <Select
+            className="titlebar-effort-select"
             options={EFFORT_OPTIONS}
             value={effort}
             onChange={(key) => setEffort(key as EffortLevel)}

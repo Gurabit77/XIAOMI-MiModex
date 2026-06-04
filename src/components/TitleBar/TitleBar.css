@@ -200,38 +200,33 @@
 }
 
 /* ---- Select 缩小适配 titlebar ---- */
-.titlebar-controls .animal-select {
-  min-width: auto;
-}
-
-.titlebar-controls [class*="select"] {
+.titlebar-controls .adaptive-select {
   min-width: 0 !important;
   max-width: 116px;
   overflow: visible;
 }
 
-.titlebar-controls [class*="select"]:first-of-type {
+.titlebar-controls .titlebar-model-select {
   min-width: 100px !important;
   max-width: 118px;
 }
 
-.titlebar-controls [class*="select"]:nth-of-type(2) {
+.titlebar-controls .titlebar-effort-select {
   width: 68px !important;
   max-width: 68px;
 }
 
-.titlebar-controls [class*="selected"],
-.titlebar-controls [class*="value"] {
+.titlebar-controls .adaptive-select-trigger {
+  min-height: 34px;
+  padding: 6px 10px;
+  overflow: hidden;
+}
+
+.titlebar-controls .adaptive-select-value,
+.titlebar-controls .adaptive-select-placeholder {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-}
-
-.titlebar-controls [class*="dropdown"] {
-  z-index: calc(var(--z-titlebar) + 20) !important;
-  min-width: max-content;
-  max-width: min(240px, 70vw);
-  filter: drop-shadow(0 8px 16px rgba(76, 60, 51, 0.16));
 }
 
 /* ---- Clock (右上角时钟) ---- */
@@ -294,12 +289,12 @@
     max-width: 318px;
   }
 
-  .titlebar-controls [class*="select"]:first-of-type {
+  .titlebar-controls .titlebar-model-select {
     min-width: 88px !important;
     max-width: 98px;
   }
 
-  .titlebar-controls [class*="select"]:nth-of-type(2) {
+  .titlebar-controls .titlebar-effort-select {
     width: 64px !important;
     max-width: 64px;
   }

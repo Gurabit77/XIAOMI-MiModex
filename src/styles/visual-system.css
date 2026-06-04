@@ -1156,7 +1156,7 @@ body:has(.settings-page) [class*="modalClipped"] {
     max-width: min(230px, 42vw);
   }
 
-  .titlebar-controls [class*="select"] {
+  .titlebar-controls .adaptive-select {
     max-width: 104px;
   }
 

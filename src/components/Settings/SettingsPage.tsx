@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { useAppStore } from "@/stores/appStore";
 import { useUIStore } from "@/stores/uiStore";
 import { useSessionStore } from "@/stores/sessionStore";
-import { Modal, Select, Switch, Button, Input, Card, Icon, Collapse } from "animal-island-ui";
+import { Modal, Switch, Button, Input, Card, Icon, Collapse } from "animal-island-ui";
 import type { IconName } from "animal-island-ui";
 import type { EffortLevel, PermissionMode, MimoPreset, SystemDiagnosticItem } from "@/types";
 import { MIMO_CODE_MODELS, MIMO_CHAT_MODELS, MIMO_TTS_MODELS, MULTIMODAL_MODELS, WEB_SEARCH_MODELS } from "@/constants/mimoCapabilities";
@@ -14,6 +14,7 @@ import { isDesktopRuntime, MIMO_CONFIG_PATH_LABEL } from "@/services/config";
 import { runSystemDiagnostics } from "@/services/diagnostics";
 import { runMimoCapabilityDiagnostics, testMimoApiConnection, type MimoCapabilityTestResult } from "@/services/mimoApi";
 import { explainError } from "@/services/errorExplain";
+import { AdaptiveSelect as Select } from "@/components/Common/AdaptiveSelect";
 import "./SettingsPage.css";
 
 const SETTINGS_NAV_MARKS: Record<string, string> = {
