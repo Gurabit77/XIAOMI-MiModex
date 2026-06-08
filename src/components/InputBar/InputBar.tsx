@@ -205,6 +205,7 @@ export function InputBar() {
   const [isMediaDragActive, setIsMediaDragActive] = useState(false);
   const [isMediaProcessing, setIsMediaProcessing] = useState(false);
   const [mediaError, setMediaError] = useState("");
+  const [mediaNotice, setMediaNotice] = useState("");
   const [showPermissionPanel, setShowPermissionPanel] = useState(false);
 
   const permissionMode = useSessionStore((s) => s.permissionMode);
@@ -248,8 +249,9 @@ export function InputBar() {
   useEffect(() => {
     const firstDraft = draftAttachments[0];
     if (!firstDraft) return;
-    setShowMediaForm(true);
     setMediaKind(firstDraft.kind);
+    setMediaNotice("已加入");
+    setShowMediaForm(false);
     setShowPermissionPanel(false);
   }, [draftAttachments]);
 
@@ -492,6 +494,7 @@ export function InputBar() {
           setAttachments([]);
           clearDraftAttachments();
           setShowMediaForm(false);
+          setMediaNotice("");
         },
         onError: (err) => {
           console.error('CLI error:', err);
@@ -618,6 +621,7 @@ export function InputBar() {
   const activePermission = PERMISSION_MODE_LABELS[permissionMode];
   const hasMediaValue = mediaValue.trim().length > 0;
   const hasPreparedMedia = hasMediaValue || allAttachments.length > 0 || isMediaProcessing;
+  const shouldShowMediaPanel = showMediaForm || isMediaProcessing || hasMediaValue || Boolean(mediaError);
   const mediaUploadClassName = [
     "input-media-upload",
     hasPreparedMedia ? "input-media-upload--ready" : "",
@@ -666,10 +670,11 @@ export function InputBar() {
       : permissionMode === "dontAsk"
         ? "保守"
         : "少打断";
-  const hasOpenComposerPanel = showPermissionPanel || showMediaForm || allAttachments.length > 0;
+  const hasOpenComposerPanel = showPermissionPanel || shouldShowMediaPanel;
   const inputBarClassName = [
     "input-bar",
     rightPanelOpen ? "input-bar--compact" : "",
+    allAttachments.length > 0 ? "input-bar--attachment-ready" : "",
     hasOpenComposerPanel ? "input-bar--panel-open" : "",
   ].filter(Boolean).join(" ");
 
@@ -689,6 +694,8 @@ export function InputBar() {
       },
     ]);
     setMediaError("");
+    setMediaNotice("加入成功");
+    setShowMediaForm(false);
     setMediaValue("");
     setMediaFileName("");
     setMediaFileSize(null);
@@ -701,11 +708,13 @@ export function InputBar() {
     setMediaFileSize(null);
     setMediaMimeType("");
     setMediaError("");
+    setMediaNotice("");
   };
 
   const removeAttachment = (id: string) => {
     setAttachments((items) => items.filter((item) => item.id !== id));
     removeDraftAttachment(id);
+    setMediaNotice("");
   };
 
   const handleMediaFiles = async (filesLike: FileList | File[]) => {
@@ -715,31 +724,48 @@ export function InputBar() {
 
     setIsMediaProcessing(true);
     setMediaError("");
-    const results = await Promise.allSettled(files.map(fileToAttachment));
-    const nextAttachments = results
-      .filter((result): result is PromiseFulfilledResult<MultimodalAttachment> => result.status === "fulfilled")
-      .map((result) => result.value);
-    const failedCount = results.length - nextAttachments.length;
+    setMediaNotice("");
+    try {
+      const results = await Promise.allSettled(files.map(fileToAttachment));
+      const nextAttachments = results
+        .filter((result): result is PromiseFulfilledResult<MultimodalAttachment> => result.status === "fulfilled")
+        .map((result) => result.value);
+      const failedCount = results.length - nextAttachments.length;
 
-    if (nextAttachments.length > 0) {
-      setAttachments((items) => {
-        const existingIds = new Set(items.map((item) => item.id));
-        return [
-          ...items,
-          ...nextAttachments.filter((item) => !existingIds.has(item.id)),
-        ];
-      });
-      setMediaKind(nextAttachments[0].kind);
-      setMediaValue("");
-      setMediaFileName("");
-      setMediaFileSize(null);
-      setMediaMimeType("");
-    }
+      if (nextAttachments.length > 0) {
+        const existingIds = new Set(allAttachments.map((item) => item.id));
+        const freshAttachments = nextAttachments.filter((item) => !existingIds.has(item.id));
+        const duplicateCount = nextAttachments.length - freshAttachments.length;
 
-    if (failedCount > 0) {
-      setMediaError(`${failedCount} 个文件读取失败，请重新选择后再试。`);
+        if (freshAttachments.length > 0) {
+          setAttachments((items) => {
+            const currentIds = new Set(items.map((item) => item.id));
+            return [
+              ...items,
+              ...freshAttachments.filter((item) => !currentIds.has(item.id)),
+            ];
+          });
+          setMediaKind(freshAttachments[0].kind);
+          setMediaNotice(freshAttachments.length > 1 ? `新增 ${freshAttachments.length} 个` : "加入成功");
+          setShowMediaForm(false);
+        } else if (duplicateCount > 0) {
+          setMediaNotice("已在请求中");
+          setShowMediaForm(false);
+        }
+
+        setMediaValue("");
+        setMediaFileName("");
+        setMediaFileSize(null);
+        setMediaMimeType("");
+      }
+
+      if (failedCount > 0) {
+        setMediaError(`${failedCount} 个文件读取失败，请重新选择后再试。`);
+        setShowMediaForm(true);
+      }
+    } finally {
+      setIsMediaProcessing(false);
     }
-    setIsMediaProcessing(false);
   };
 
   const handleMediaDragEnter = (e: DragEvent<HTMLDivElement>) => {
@@ -934,7 +960,43 @@ export function InputBar() {
           </div>
         )}
 
-        {(showMediaForm || allAttachments.length > 0) && (
+        {allAttachments.length > 0 && !shouldShowMediaPanel && (
+          <div className="input-attachment-strip" aria-live="polite">
+            <div className="input-attachment-strip-meta">
+              <span className="input-attachment-strip-title">
+                <Icon name="icon-design" size={13} />
+                素材已加入
+              </span>
+              <span className="input-attachment-strip-count">{allAttachments.length} 个</span>
+              {mediaNotice && <span className="input-media-success">{mediaNotice}</span>}
+            </div>
+            <div className="input-media-chips input-media-chips--compact">
+              {allAttachments.map((item) => (
+                <button
+                  key={item.id}
+                  type="button"
+                  className="input-media-chip"
+                  onClick={() => removeAttachment(item.id)}
+                  title="点击移除"
+                >
+                  {MULTIMODAL_LABELS[item.kind]} · {item.label || item.sourceType}
+                </button>
+              ))}
+            </div>
+            <Button
+              type="text"
+              size="small"
+              onClick={() => {
+                setShowMediaForm(true);
+                setShowPermissionPanel(false);
+              }}
+            >
+              继续添加
+            </Button>
+          </div>
+        )}
+
+        {shouldShowMediaPanel && (
           <div className="input-media-panel">
             <div
               className={mediaUploadClassName}
@@ -1061,21 +1123,6 @@ export function InputBar() {
                 : "当前模型不在 MiMo 多模态支持列表；请切换到 mimo-v2.5 或 mimo-v2-omni。"}
             </div>
             {mediaError && <div className="input-media-error">{mediaError}</div>}
-            {allAttachments.length > 0 && (
-              <div className="input-media-chips">
-                {allAttachments.map((item) => (
-                  <button
-                    key={item.id}
-                    type="button"
-                    className="input-media-chip"
-                    onClick={() => removeAttachment(item.id)}
-                    title="点击移除"
-                  >
-                    {MULTIMODAL_LABELS[item.kind]} · {item.label || item.sourceType}
-                  </button>
-                ))}
-              </div>
-            )}
           </div>
         )}
 
