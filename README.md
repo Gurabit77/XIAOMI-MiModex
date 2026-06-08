@@ -15,6 +15,12 @@ MiModex 基于 Tauri、React、TypeScript、Rust 构建，并内置了一份 Ani
 - 本地设置和诊断：检查 API 连接、内置引擎、系统环境、能力可用性。
 - GitHub Actions 发布流程已支持 Apple Silicon Mac、Intel Mac、Windows x64。
 
+## 近期修复
+
+- `v1.0.2`：优化输入栏多模态素材上传。使用 `mimo-v2.5` / `mimo-v2-omni` 时，可以一次选择或拖入多个图片、音频、视频文件，文件会自动转成 data URL/Base64 并直接加入本次请求，不再需要逐个文件点击“加入本次请求”。
+- `v1.0.2`：保留高级 URL/Base64 手动输入入口，并将按钮文案调整为“加入 URL/Base64”，避免和本地文件批量上传流程混淆。
+- `v1.0.1`：修复设置页滚动、下拉框溢出视口和高缩放比例下被遮挡的问题。
+
 ## 界面预览
 
 ### MiMo Code 对话工作流

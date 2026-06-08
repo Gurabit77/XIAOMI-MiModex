@@ -23,6 +23,7 @@ import { MIMO_CODE_MODELS, MULTIMODAL_LABELS, MULTIMODAL_MODELS } from "@/consta
 import "./InputBar.css";
 
 const COMPOSITION_SEND_GUARD_MS = 900;
+const MEDIA_FILE_ACCEPT = "image/*,audio/*,video/*";
 
 const PERMISSION_MODE_LABELS: Record<PermissionMode, { label: string; short: string; detail: string; badge: string; tone: string }> = {
   default: {
@@ -202,6 +203,8 @@ export function InputBar() {
   const [mediaMimeType, setMediaMimeType] = useState("");
   const [attachments, setAttachments] = useState<MultimodalAttachment[]>([]);
   const [isMediaDragActive, setIsMediaDragActive] = useState(false);
+  const [isMediaProcessing, setIsMediaProcessing] = useState(false);
+  const [mediaError, setMediaError] = useState("");
   const [showPermissionPanel, setShowPermissionPanel] = useState(false);
 
   const permissionMode = useSessionStore((s) => s.permissionMode);
@@ -609,12 +612,12 @@ export function InputBar() {
   const openRightPanel = useUIStore((s) => s.openRightPanel);
   const supportsMultimodal = MULTIMODAL_MODELS.includes(currentModel);
   const attachmentsBlocked = allAttachments.length > 0 && !supportsMultimodal;
-  const canSend = inputValue.trim().length > 0 && !isStreaming && !attachmentsBlocked;
+  const canSend = inputValue.trim().length > 0 && !isStreaming && !attachmentsBlocked && !isMediaProcessing;
   const modelLabel = MIMO_CODE_MODELS.find((model) => model.key === currentModel)?.label ?? currentModel;
   const effortLabel = EFFORT_LABELS[effort];
   const activePermission = PERMISSION_MODE_LABELS[permissionMode];
   const hasMediaValue = mediaValue.trim().length > 0;
-  const hasPreparedMedia = hasMediaValue || allAttachments.length > 0;
+  const hasPreparedMedia = hasMediaValue || allAttachments.length > 0 || isMediaProcessing;
   const mediaUploadClassName = [
     "input-media-upload",
     hasPreparedMedia ? "input-media-upload--ready" : "",
@@ -623,13 +626,33 @@ export function InputBar() {
   ].filter(Boolean).join(" ");
   const mediaUploadStatus = !supportsMultimodal
     ? "需切模型"
+    : isMediaProcessing
+      ? "加入中"
+    : allAttachments.length > 0
+      ? `已带入 ${allAttachments.length}`
     : hasMediaValue
-      ? "已准备"
-      : allAttachments.length > 0
-        ? "已带入"
-      : isMediaDragActive
-        ? "松手上传"
-        : "待选择";
+      ? "待加入"
+    : isMediaDragActive
+      ? "松手上传"
+      : "待选择";
+  const mediaFileSummary = mediaFileName || (mediaValue.trim()
+    ? "手动输入"
+    : allAttachments.length > 0
+      ? `${allAttachments.length} 个素材已带入`
+      : "未选择");
+  const mediaKindSummary = !hasMediaValue && allAttachments.length > 0
+    ? "自动识别"
+    : MULTIMODAL_LABELS[mediaKind];
+  const mediaSizeSummary = mediaFileSize != null
+    ? formatFileSize(mediaFileSize)
+    : allAttachments.length > 0
+      ? "见下方列表"
+      : "未记录";
+  const mediaMimeSummary = mediaMimeType || (mediaValue.startsWith("data:")
+    ? mediaValue.slice(5, mediaValue.indexOf(";"))
+    : allAttachments.length > 0
+      ? "自动识别"
+      : "URL/Base64");
   const modeSummary = [
     modelLabel,
     effortLabel,
@@ -665,6 +688,7 @@ export function InputBar() {
         mimeType: mediaMimeType || undefined,
       },
     ]);
+    setMediaError("");
     setMediaValue("");
     setMediaFileName("");
     setMediaFileSize(null);
@@ -676,6 +700,7 @@ export function InputBar() {
     setMediaFileName("");
     setMediaFileSize(null);
     setMediaMimeType("");
+    setMediaError("");
   };
 
   const removeAttachment = (id: string) => {
@@ -683,15 +708,38 @@ export function InputBar() {
     removeDraftAttachment(id);
   };
 
-  const handleMediaFile = async (file: File) => {
-    if (!supportsMultimodal) return;
-    const nextKind = inferMultimodalKind(file, mediaKind);
-    const dataUrl = await readFileAsDataUrl(file);
-    setMediaKind(nextKind);
-    setMediaValue(dataUrl);
-    setMediaFileName(file.name);
-    setMediaFileSize(file.size);
-    setMediaMimeType(file.type || fileAccept(nextKind).replace("/*", ""));
+  const handleMediaFiles = async (filesLike: FileList | File[]) => {
+    if (!supportsMultimodal || isMediaProcessing) return;
+    const files = Array.from(filesLike).filter(Boolean);
+    if (files.length === 0) return;
+
+    setIsMediaProcessing(true);
+    setMediaError("");
+    const results = await Promise.allSettled(files.map(fileToAttachment));
+    const nextAttachments = results
+      .filter((result): result is PromiseFulfilledResult<MultimodalAttachment> => result.status === "fulfilled")
+      .map((result) => result.value);
+    const failedCount = results.length - nextAttachments.length;
+
+    if (nextAttachments.length > 0) {
+      setAttachments((items) => {
+        const existingIds = new Set(items.map((item) => item.id));
+        return [
+          ...items,
+          ...nextAttachments.filter((item) => !existingIds.has(item.id)),
+        ];
+      });
+      setMediaKind(nextAttachments[0].kind);
+      setMediaValue("");
+      setMediaFileName("");
+      setMediaFileSize(null);
+      setMediaMimeType("");
+    }
+
+    if (failedCount > 0) {
+      setMediaError(`${failedCount} 个文件读取失败，请重新选择后再试。`);
+    }
+    setIsMediaProcessing(false);
   };
 
   const handleMediaDragEnter = (e: DragEvent<HTMLDivElement>) => {
@@ -715,8 +763,8 @@ export function InputBar() {
     e.preventDefault();
     setIsMediaDragActive(false);
     if (!supportsMultimodal) return;
-    const file = e.dataTransfer.files?.[0];
-    if (file) void handleMediaFile(file);
+    const files = e.dataTransfer.files;
+    if (files?.length) void handleMediaFiles(files);
   };
 
   return (
@@ -903,7 +951,7 @@ export function InputBar() {
                   <div className="input-media-upload-title">上传素材</div>
                   <div className="input-media-upload-desc">
                     {supportsMultimodal
-                      ? "选文件后自动转成 data URL/Base64。"
+                      ? "可一次选择多个文件，自动加入本次请求。"
                       : "当前模型暂不支持附件，切换到多模态模型后即可上传。"}
                   </div>
                 </div>
@@ -932,19 +980,19 @@ export function InputBar() {
               <div className="input-media-meta-grid">
                 <div className="input-media-meta">
                   <span>类型</span>
-                  <strong>{MULTIMODAL_LABELS[mediaKind]}</strong>
+                  <strong>{mediaKindSummary}</strong>
                 </div>
                 <div className="input-media-meta">
                   <span>文件名</span>
-                  <strong>{mediaFileName || (mediaValue.trim() ? "手动输入" : "未选择")}</strong>
+                  <strong>{mediaFileSummary}</strong>
                 </div>
                 <div className="input-media-meta">
                   <span>大小</span>
-                  <strong>{mediaFileSize != null ? formatFileSize(mediaFileSize) : "未记录"}</strong>
+                  <strong>{mediaSizeSummary}</strong>
                 </div>
                 <div className="input-media-meta">
                   <span>格式</span>
-                  <strong>{mediaMimeType || (mediaValue.startsWith("data:") ? mediaValue.slice(5, mediaValue.indexOf(";")) : "URL/Base64")}</strong>
+                  <strong>{mediaMimeSummary}</strong>
                 </div>
               </div>
               <div className="input-media-row">
@@ -953,12 +1001,12 @@ export function InputBar() {
                   size="small"
                   icon={<Icon name="icon-design" size={14} />}
                   onClick={() => mediaFileInputRef.current?.click()}
-                  disabled={!supportsMultimodal}
+                  disabled={!supportsMultimodal || isMediaProcessing}
                 >
-                  选择文件
+                  {isMediaProcessing ? "加入中" : "选择文件"}
                 </Button>
-                <Button type="default" size="small" onClick={addAttachment} disabled={!supportsMultimodal || !hasMediaValue}>
-                  加入本次请求
+                <Button type="default" size="small" onClick={addAttachment} disabled={!supportsMultimodal || !hasMediaValue || isMediaProcessing}>
+                  加入 URL/Base64
                 </Button>
                 <Button type="text" size="small" onClick={clearMediaValue} disabled={!hasMediaValue}>
                   清空
@@ -968,11 +1016,12 @@ export function InputBar() {
                 ref={mediaFileInputRef}
                 className="input-media-file"
                 type="file"
-                accept={fileAccept(mediaKind)}
-                disabled={!supportsMultimodal}
+                accept={MEDIA_FILE_ACCEPT}
+                multiple
+                disabled={!supportsMultimodal || isMediaProcessing}
                 onChange={(e) => {
-                  const file = e.currentTarget.files?.[0];
-                  if (file) void handleMediaFile(file);
+                  const files = e.currentTarget.files;
+                  if (files?.length) void handleMediaFiles(files);
                   e.currentTarget.value = "";
                 }}
               />
@@ -1008,9 +1057,10 @@ export function InputBar() {
             </div>
             <div className="input-media-note">
               {supportsMultimodal
-                ? "支持多模态时可直接上传，MiMo 仍要求使用 URL 或 Base64。"
+                ? "本地文件会自动转成 data URL/Base64；手动 URL/Base64 请在高级入口加入。"
                 : "当前模型不在 MiMo 多模态支持列表；请切换到 mimo-v2.5 或 mimo-v2-omni。"}
             </div>
+            {mediaError && <div className="input-media-error">{mediaError}</div>}
             {allAttachments.length > 0 && (
               <div className="input-media-chips">
                 {allAttachments.map((item) => (
@@ -1116,7 +1166,25 @@ function inferMultimodalKind(file: File, fallback: MultimodalKind): MultimodalKi
   return fallback;
 }
 
-function fileAccept(kind: MultimodalKind): string {
+async function fileToAttachment(file: File): Promise<MultimodalAttachment> {
+  const kind = inferMultimodalKind(file, "image");
+  const value = await readFileAsDataUrl(file);
+  return {
+    id: createFileAttachmentId(file),
+    kind,
+    sourceType: "base64",
+    value,
+    label: file.name,
+    mimeType: file.type || mediaMimeFallback(kind),
+  };
+}
+
+function createFileAttachmentId(file: File): string {
+  const signature = `${file.name}-${file.size}-${file.lastModified}`;
+  return `file-${signature.replace(/[^a-z0-9._-]+/gi, "-")}`;
+}
+
+function mediaMimeFallback(kind: MultimodalKind): string {
   if (kind === "image") return "image/*";
   if (kind === "audio") return "audio/*";
   return "video/*";

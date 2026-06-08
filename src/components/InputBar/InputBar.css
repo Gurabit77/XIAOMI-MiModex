@@ -1030,6 +1030,13 @@
   overflow: hidden;
 }
 
+.input-media-error {
+  margin-top: var(--space-xs);
+  color: var(--color-error);
+  font-size: var(--font-size-sm);
+  line-height: 1.45;
+}
+
 .input-media-chips {
   display: flex;
   flex-wrap: wrap;

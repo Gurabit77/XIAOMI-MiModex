@@ -1,6 +1,6 @@
 [package]
 name = "mimodex"
-version = "1.0.1"
+version = "1.0.2"
 description = "MiModex — MiMo Code desktop controller"
 authors = ["MiModex Team"]
 edition = "2021"
